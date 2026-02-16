@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const posts = sqliteTable("posts", {
@@ -9,8 +10,12 @@ export const posts = sqliteTable("posts", {
 	status: text("status", { enum: ["draft", "published"] })
 		.notNull()
 		.default("draft"),
-	createdAt: text("created_at").notNull().default(""),
-	updatedAt: text("updated_at").notNull().default(""),
+	createdAt: text("created_at")
+		.notNull()
+		.default(sql`(datetime('now'))`),
+	updatedAt: text("updated_at")
+		.notNull()
+		.default(sql`(datetime('now'))`),
 });
 
 export type Post = typeof posts.$inferSelect;
