@@ -5,6 +5,22 @@ export function Welcome({ message }: { message: string }) {
 	return (
 		<main className="flex items-center justify-center pt-16 pb-4">
 			<div className="flex-1 flex flex-col items-center gap-16 min-h-0">
+				{/* Deployment verification banner - confirms Cloudflare Workers + env are working */}
+				<div
+					className="w-full max-w-xl mx-4 p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800"
+					role="status"
+					aria-live="polite"
+				>
+					<p className="font-medium text-green-800 dark:text-green-200 text-sm">
+						✓ Cloudflare deployment check
+					</p>
+					<p className="text-green-700 dark:text-green-300 text-sm mt-1">
+						Env var from Workers: <code className="bg-green-100 dark:bg-green-900/40 px-1.5 py-0.5 rounded">{message}</code>
+					</p>
+					<p className="text-green-600 dark:text-green-400 text-xs mt-2 opacity-90">
+						Build: 2025-02-16-deploy-test • If you see this, your Cloudflare setup is working!
+					</p>
+				</div>
 				<header className="flex flex-col items-center gap-9">
 					<div className="w-[500px] max-w-[100vw] p-4">
 						<img
