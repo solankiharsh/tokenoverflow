@@ -1,5 +1,6 @@
 import type { Route } from "./+types/api.subscribe";
 import { isValidEmail } from "../lib/email-validation";
+import { loadContextKey } from "../lib/load-context";
 
 export async function action({ request, context }: Route.ActionArgs) {
 	if (request.method !== "POST") {
@@ -14,7 +15,7 @@ export async function action({ request, context }: Route.ActionArgs) {
 	if (!isValidEmail(value)) {
 		return Response.json({ ok: false, error: "Invalid email address" }, { status: 400 });
 	}
-	const kv = (context.cloudflare.env as { SUBSCRIBERS?: KVNamespace }).SUBSCRIBERS;
+	const kv = (context.get(loadContextKey).cloudflare.env as { SUBSCRIBERS?: KVNamespace }).SUBSCRIBERS;
 	if (!kv) {
 		return Response.json(
 			{ ok: false, error: "Subscribe not configured" },

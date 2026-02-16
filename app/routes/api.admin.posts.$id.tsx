@@ -1,6 +1,7 @@
 import { redirect } from "react-router";
 import type { Route } from "./+types/api.admin.posts.$id";
 import { requireAdmin } from "../lib/admin-auth";
+import { loadContextKey } from "../lib/load-context";
 import { deletePost, updatePost } from "../data/blog";
 
 export async function action(args: Route.ActionArgs) {
@@ -8,9 +9,7 @@ export async function action(args: Route.ActionArgs) {
 	const { id } = args.params;
 	if (!id) throw new Response("Bad request", { status: 400 });
 
-	const env = (args.context as unknown as {
-		cloudflare: { env: { DB: Parameters<typeof updatePost>[0] } };
-	}).cloudflare.env;
+	const env = args.context.get(loadContextKey).cloudflare.env as { DB: Parameters<typeof updatePost>[0] };
 
 	if (args.request.method === "DELETE") {
 		await deletePost(env.DB, id);

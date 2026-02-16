@@ -1,10 +1,10 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/blog";
+import { loadContextKey } from "../lib/load-context";
 import { getPosts } from "../data/blog";
 
 export async function loader(args: Route.LoaderArgs) {
-	const env = (args.context as { cloudflare?: { env?: { DB?: Parameters<typeof getPosts>[0] } } })
-		?.cloudflare?.env;
+	const env = args.context.get(loadContextKey).cloudflare.env as { DB?: Parameters<typeof getPosts>[0] };
 	if (!env?.DB) {
 		console.warn("[blog] D1 DB binding not available (e.g. local dev without migrations). Returning empty posts.");
 		return { posts: [] };

@@ -2,13 +2,13 @@ import { Link, useFetcher } from "react-router";
 import { useState, useEffect } from "react";
 import type { Route } from "./+types/admin.posts.$id.edit";
 import { requireAdmin } from "../lib/admin-auth";
+import { loadContextKey } from "../lib/load-context";
 import { getPostByIdForAdmin } from "../data/blog";
 import { PostEditor, type PostEditorValues } from "../components/PostEditor";
 
 export async function loader(args: Route.LoaderArgs) {
 	await requireAdmin(args);
-	const env = (args.context as unknown as { cloudflare: { env: { DB: Parameters<typeof getPostByIdForAdmin>[0] } } })
-		.cloudflare.env;
+	const env = args.context.get(loadContextKey).cloudflare.env as { DB: Parameters<typeof getPostByIdForAdmin>[0] };
 	const post = await getPostByIdForAdmin(env.DB, args.params.id);
 	if (!post) throw new Response("Not found", { status: 404 });
 	return { post };

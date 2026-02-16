@@ -14,12 +14,14 @@ import type { Route } from "./+types/root";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { terminalAppearance } from "./lib/clerk-appearance";
+import { loadContextKey } from "./lib/load-context";
 import "./app.css";
 
 export const middleware = [clerkMiddleware()] as unknown as Route.MiddlewareFunction[];
 export async function loader(args: Route.LoaderArgs) {
 	const auth = await rootAuthLoader(args);
-	const debug = (args.context as { debug?: boolean })?.debug ?? false;
+	const loadContext = args.context.get(loadContextKey);
+	const debug = loadContext?.debug ?? false;
 	const data = typeof auth === "object" && auth !== null ? auth : {};
 	return { ...data, debug };
 }

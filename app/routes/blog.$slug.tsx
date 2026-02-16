@@ -1,11 +1,11 @@
 import { Link, useRouteError } from "react-router";
 import ReactMarkdown from "react-markdown";
 import type { Route } from "./+types/blog.$slug";
+import { loadContextKey } from "../lib/load-context";
 import { getPost } from "../data/blog";
 
 export async function loader(args: Route.LoaderArgs) {
-	const env = (args.context as { cloudflare?: { env?: { DB?: Parameters<typeof getPost>[0] } } })
-		?.cloudflare?.env;
+	const env = args.context.get(loadContextKey).cloudflare.env as { DB?: Parameters<typeof getPost>[0] };
 	if (!env?.DB) {
 		throw new Response("Not found", { status: 404 });
 	}

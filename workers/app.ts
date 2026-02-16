@@ -1,4 +1,5 @@
-import { createRequestHandler } from "react-router";
+import { createRequestHandler, RouterContextProvider } from "react-router";
+import { loadContextKey } from "../app/lib/load-context";
 
 declare module "react-router" {
 	export interface AppLoadContext {
@@ -39,12 +40,13 @@ export default {
 	async fetch(request, env, ctx) {
 		const url = new URL(request.url);
 		const debug = url.searchParams.has("debug") || request.headers.get("X-Debug") === "1";
-		const loadContext = {
+		const requestContext = new RouterContextProvider();
+		requestContext.set(loadContextKey, {
 			cloudflare: { env, ctx },
 			debug,
-		};
+		});
 		try {
-			const response = await requestHandler(request, loadContext);
+			const response = await requestHandler(request, requestContext);
 			if (response.status === 500 && debug) {
 				return new Response(DEBUG_500_HTML, {
 					status: 500,

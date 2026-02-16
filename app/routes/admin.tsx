@@ -1,12 +1,13 @@
 import { Link, useFetcher } from "react-router";
 import type { Route } from "./+types/admin";
 import { requireAdmin } from "../lib/admin-auth";
+import { loadContextKey } from "../lib/load-context";
 import { getAllPostsAdmin } from "../data/blog";
 
 export async function loader(args: Route.LoaderArgs) {
 	await requireAdmin(args);
-	const env = (args.context as unknown as { cloudflare: { env: { DB: Parameters<typeof getAllPostsAdmin>[0] } } })
-		.cloudflare.env;
+	const { cloudflare } = args.context.get(loadContextKey);
+	const env = cloudflare.env as { DB: Parameters<typeof getAllPostsAdmin>[0] };
 	const posts = await getAllPostsAdmin(env.DB);
 	return { posts };
 }

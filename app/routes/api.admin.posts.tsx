@@ -1,6 +1,7 @@
 import { redirect } from "react-router";
 import type { Route } from "./+types/api.admin.posts";
 import { requireAdmin } from "../lib/admin-auth";
+import { loadContextKey } from "../lib/load-context";
 import { createPost } from "../data/blog";
 
 export async function action(args: Route.ActionArgs) {
@@ -14,8 +15,7 @@ export async function action(args: Route.ActionArgs) {
 	if (!slug || !title || !content) {
 		return new Response("Missing slug, title, or content", { status: 400 });
 	}
-	const env = (args.context as unknown as { cloudflare: { env: { DB: Parameters<typeof createPost>[0] } } })
-		.cloudflare.env;
+	const env = args.context.get(loadContextKey).cloudflare.env as { DB: Parameters<typeof createPost>[0] };
 	await createPost(env.DB, { slug, title, excerpt, content, status });
 	throw redirect("/admin", { status: 303 });
 }
