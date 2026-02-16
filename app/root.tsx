@@ -5,6 +5,7 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useRouteLoaderData,
 } from "react-router";
 import { clerkMiddleware, rootAuthLoader } from "@clerk/react-router/server";
 import { ClerkProvider } from "@clerk/react-router";
@@ -15,8 +16,13 @@ import { Footer } from "./components/Footer";
 import { terminalAppearance } from "./lib/clerk-appearance";
 import "./app.css";
 
-export const middleware: Route.MiddlewareFunction[] = [clerkMiddleware()];
-export const loader = (args: Route.LoaderArgs) => rootAuthLoader(args);
+export const middleware = [clerkMiddleware()] as unknown as Route.MiddlewareFunction[];
+export async function loader(args: Route.LoaderArgs) {
+	const auth = await rootAuthLoader(args);
+	const debug = (args.context as { debug?: boolean })?.debug ?? false;
+	const data = typeof auth === "object" && auth !== null ? auth : {};
+	return { ...data, debug };
+}
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -67,6 +73,9 @@ export default function App({ loaderData }: Route.ComponentProps) {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+	const rootData = useRouteLoaderData("root") as { debug?: boolean } | undefined;
+	const showDetails = import.meta.env.DEV || rootData?.debug === true;
+
 	let message = "Oops!";
 	let details = "An unexpected error occurred.";
 	let stack: string | undefined;
@@ -77,7 +86,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 			error.status === 404
 				? "The requested page could not be found."
 				: error.statusText || details;
-	} else if (import.meta.env.DEV && error && error instanceof Error) {
+	} else if (showDetails && error && error instanceof Error) {
 		details = error.message;
 		stack = error.stack;
 	}
