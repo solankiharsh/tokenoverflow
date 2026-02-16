@@ -100,6 +100,27 @@ For **local dev**, `npm run dev` uses a local D1 database. First-time setup: run
 
 The subscribe form stores emails in Cloudflare KV. The project’s `wrangler.json` is already configured with a SUBSCRIBERS KV namespace ID. If you need to create a new one: `npx wrangler kv namespace create SUBSCRIBERS`, then put the returned `id` into `wrangler.json` under `kv_namespaces[0].id`. Run `npm run cf-typegen` after any change.
 
+## Debugging "Unexpected Server Error"
+
+If your Workers deployment shows a blank **Unexpected Server Error** page:
+
+1. **See the actual error in the browser**  
+   Open the same URL with `?debug=1` (e.g. `https://your-worker.workers.dev/?debug=1`). The response body will show the error message and stack trace. Remove `?debug=1` when done; don’t rely on it in production.
+
+2. **Check Cloudflare Real-time Logs**  
+   In the [Cloudflare dashboard](https://dash.cloudflare.com) → **Workers & Pages** → your Worker → **Logs** (or **Real-time Logs**). Errors are logged there; look for `[tokenoverflow] Server error:` or `[tokenoverflow] Unexpected server error:`.
+
+3. **Confirm bindings and env**  
+   In the Worker’s **Settings** → **Variables and Secrets**: set **Variables** `VITE_CLERK_PUBLISHABLE_KEY` and `CLERK_PUBLISHABLE_KEY` to your Clerk publishable key (not empty). Add secret **CLERK_SECRET_KEY**. Under **Settings** → **Bindings**, ensure the **D1** binding **DB** is attached to your `tokenoverflow-blog` database.
+
+4. **Run D1 migrations on production**  
+   If the error mentions D1 or “no such table”, apply migrations to the remote DB:  
+   `set -a && source .env.local && set +a && make db-setup-remote`  
+   (or `make db-migrate` with the same env so it targets the DB in `wrangler.json`).
+
+5. **Reproduce locally**  
+   Run `npm run dev` and open `http://localhost:5173`. If it works locally but fails on Workers, the issue is usually a missing binding, empty Clerk keys, or migrations not applied to the deployed D1.
+
 ## Typegen
 
 Generate types for your Cloudflare bindings in `wrangler.json`:
