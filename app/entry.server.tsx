@@ -3,6 +3,12 @@ import { ServerRouter } from "react-router";
 import { isbot } from "isbot";
 import { renderToReadableStream } from "react-dom/server";
 
+export function handleError(error: unknown, { request }: { request: Request }) {
+	if (!request.signal?.aborted) {
+		console.error("[tokenoverflow] Server error:", error);
+	}
+}
+
 export default async function handleRequest(
 	request: Request,
 	responseStatusCode: number,

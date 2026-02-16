@@ -1,0 +1,8 @@
+# Minimal config so pre-commit.ci finds the file. Install: pip install pre-commit && pre-commit install
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
