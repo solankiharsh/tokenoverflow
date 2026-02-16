@@ -6,9 +6,17 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from "react-router";
+import { clerkMiddleware, rootAuthLoader } from "@clerk/react-router/server";
+import { ClerkProvider } from "@clerk/react-router";
 
 import type { Route } from "./+types/root";
+import { Nav } from "./components/Nav";
+import { Footer } from "./components/Footer";
+import { terminalAppearance } from "./lib/clerk-appearance";
 import "./app.css";
+
+export const middleware: Route.MiddlewareFunction[] = [clerkMiddleware()];
+export const loader = (args: Route.LoaderArgs) => rootAuthLoader(args);
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -19,7 +27,7 @@ export const links: Route.LinksFunction = () => [
 	},
 	{
 		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap",
 	},
 ];
 
@@ -32,7 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body>
+			<body className="flex flex-col min-h-screen">
 				{children}
 				<ScrollRestoration />
 				<Scripts />
@@ -41,8 +49,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	);
 }
 
-export default function App() {
-	return <Outlet />;
+export default function App({ loaderData }: Route.ComponentProps) {
+	return (
+		<ClerkProvider
+			publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? ""}
+			loaderData={loaderData}
+			appearance={terminalAppearance}
+			afterSignOutUrl="/"
+		>
+			<Nav />
+			<main className="flex-1">
+				<Outlet />
+			</main>
+			<Footer />
+		</ClerkProvider>
+	);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
@@ -62,11 +83,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 	}
 
 	return (
-		<main className="pt-16 p-4 container mx-auto">
-			<h1>{message}</h1>
-			<p>{details}</p>
+		<main className="max-w-3xl mx-auto px-4 py-16 font-mono text-[var(--terminal-text)]">
+			<h1 className="text-xl text-[var(--terminal-accent)]">{message}</h1>
+			<p className="text-sm text-[var(--terminal-text-muted)] mt-2">{details}</p>
 			{stack && (
-				<pre className="w-full p-4 overflow-x-auto">
+				<pre className="w-full p-4 mt-4 overflow-x-auto text-xs rounded border border-[var(--terminal-border)] bg-[var(--terminal-bg)]">
 					<code>{stack}</code>
 				</pre>
 			)}

@@ -36,6 +36,8 @@ Install the dependencies:
 
 ```bash
 npm install
+# or
+make install
 ```
 
 ### Development
@@ -44,9 +46,57 @@ Start the development server with HMR:
 
 ```bash
 npm run dev
+# or
+make dev
 ```
 
 Your application will be available at `http://localhost:5173`.
+
+**Makefile shortcuts:** `make help` lists all targets. Use `make install`, `make dev`, `make build`, `make deploy`, `make preview`, `make typecheck`, `make clean`, or `make kill-ports` (if the dev server port is stuck).
+
+## Before first deploy (you do this, not the PR)
+
+**Merging a PR only deploys code.** It does not create Cloudflare resources or run migrations. To have a working production site (blog, subscribe, sign-in), do the following **once** before or right after your first deploy:
+
+| What | Where / How |
+|------|-------------|
+| **D1 (blog)** | Run `make db-create`, put `database_id` in `wrangler.json`, then `make db-migrate` and optionally `make db-seed`. |
+| **KV (subscribe)** | Run `npx wrangler kv namespace create SUBSCRIBERS`, put the returned `id` in `wrangler.json`. |
+| **Clerk (auth)** | In Cloudflare Workers dashboard → your Worker → **Settings** → **Variables and Secrets**: add secret `CLERK_SECRET_KEY` and variables `VITE_CLERK_PUBLISHABLE_KEY` and `CLERK_PUBLISHABLE_KEY`. |
+
+**Where to run the D1 and KV commands:** In your **local terminal**, from the project root (the `tokenoverflow/` directory). Log in to Cloudflare first: `npx wrangler login` (or set `CLOUDFLARE_API_TOKEN`). Then run the commands; paste the returned IDs into `wrangler.json` in this repo. Clerk is configured in the **Cloudflare dashboard** only (no terminal commands).
+
+Details for each are below.
+
+---
+
+## Authentication (Clerk)
+
+Sign-in and admin blog CMS use [Clerk](https://clerk.com) with social login (Google, GitHub, etc.).
+
+1. Create an application at [dashboard.clerk.com](https://dashboard.clerk.com).
+2. Copy `.dev.vars.example` to `.dev.vars` and set `VITE_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY`.
+3. For production: in Cloudflare Workers dashboard, add **Secrets** `CLERK_SECRET_KEY` and set **Variables** `VITE_CLERK_PUBLISHABLE_KEY` and `CLERK_PUBLISHABLE_KEY` (same value as publishable key).
+4. To enable the **Admin** link and `/admin` blog CMS: in Clerk dashboard, open your user → **Public metadata** → add `{ "role": "admin" }`.
+
+## Blog CMS and D1
+
+Blog posts are stored in Cloudflare D1 (SQLite). The admin dashboard at `/admin` (admin users only) lets you create, edit, and delete posts without deploying.
+
+1. Create a D1 database (if needed): `make db-create` or create in the Cloudflare dashboard. Your API token must have **D1 Edit** for `make db-create`.
+2. Put **`CLOUDFLARE_API_TOKEN`** in `.env.local` (and optionally **`CLOUDFLARE_ACCOUNT_ID`** if you have multiple accounts). Then run **`make update-d1-uuid`**: it uses the Cloudflare API to list D1 databases, finds the one named in `wrangler.json` (e.g. `tokenoverflow-blog`), and sets `d1_databases[0].database_id` to that database’s UUID. No need to copy the UUID by hand.
+3. Apply schema and seed to the **remote** D1 (required once so the blog works in production). With the token in the environment (e.g. from `.env.local`), run:
+   ```bash
+   set -a && source .env.local && set +a && make db-setup-remote
+   ```
+   Or `export CLOUDFLARE_API_TOKEN=your_token_here && make db-setup-remote`. You can run `make db-migrate` then `make db-seed` separately; both use the DB in `wrangler.json`.
+4. Run `npm run cf-typegen` after any `wrangler.json` change.
+
+For **local dev**, `npm run dev` uses a local D1 database. First-time setup: run `make db-setup-local` (creates the `posts` table and seeds sample posts). If you only need the table, run `make db-migrate-local`; run `make db-seed-local` only after the table exists.
+
+## Newsletter (Subscribe)
+
+The subscribe form stores emails in Cloudflare KV. The project’s `wrangler.json` is already configured with a SUBSCRIBERS KV namespace ID. If you need to create a new one: `npx wrangler kv namespace create SUBSCRIBERS`, then put the returned `id` into `wrangler.json` under `kv_namespaces[0].id`. Run `npm run cf-typegen` after any change.
 
 ## Typegen
 
