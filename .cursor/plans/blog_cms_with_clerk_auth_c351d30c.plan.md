@@ -239,4 +239,3 @@ These are styled to match the terminal theme via Clerk's `appearance` prop.
 
 - `app/content/blog/*.md` -- posts move to D1
 - `gray-matter` dependency
-
