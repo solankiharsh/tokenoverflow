@@ -13,6 +13,8 @@ interface PostEditorProps {
 	values: PostEditorValues;
 	onChange: (values: PostEditorValues) => void;
 	submitLabel: string;
+	/** When true, submit button shows "Saving…" and is disabled */
+	isSubmitting?: boolean;
 	children?: React.ReactNode;
 }
 
@@ -20,6 +22,7 @@ export function PostEditor({
 	values,
 	onChange,
 	submitLabel,
+	isSubmitting = false,
 	children,
 }: PostEditorProps) {
 	const [preview, setPreview] = useState(false);
@@ -117,6 +120,13 @@ export function PostEditor({
 					</span>
 				</label>
 			</div>
+			<button
+				type="submit"
+				className="font-mono text-sm text-[var(--terminal-bg)] bg-[var(--terminal-accent)] px-4 py-2 rounded hover:opacity-90 disabled:opacity-50"
+				disabled={isSubmitting}
+			>
+				{isSubmitting ? "Saving…" : submitLabel}
+			</button>
 			{children}
 		</div>
 	);

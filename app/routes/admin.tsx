@@ -1,20 +1,11 @@
-import { getAuth } from "@clerk/react-router/server";
 import { Link, useFetcher } from "react-router";
 import type { Route } from "./+types/admin";
+import { requireAdmin } from "../lib/admin-auth";
 import { getAllPostsAdmin } from "../data/blog";
 
-function isAdmin(sessionClaims: unknown): boolean {
-	const meta = (sessionClaims as { publicMetadata?: { role?: string } })
-		?.publicMetadata;
-	return meta?.role === "admin";
-}
-
 export async function loader(args: Route.LoaderArgs) {
-	const { userId, sessionClaims } = await getAuth(args);
-	if (!userId || !isAdmin(sessionClaims)) {
-		throw new Response("Forbidden", { status: 403 });
-	}
-	const env = (args.context as { cloudflare: { env: { DB: Parameters<typeof getAllPostsAdmin>[0] } } })
+	await requireAdmin(args);
+	const env = (args.context as unknown as { cloudflare: { env: { DB: Parameters<typeof getAllPostsAdmin>[0] } } })
 		.cloudflare.env;
 	const posts = await getAllPostsAdmin(env.DB);
 	return { posts };

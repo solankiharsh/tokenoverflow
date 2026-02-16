@@ -1,29 +1,20 @@
-import { getAuth } from "@clerk/react-router/server";
 import { redirect } from "react-router";
 import type { Route } from "./+types/api.admin.posts.$id";
+import { requireAdmin } from "../lib/admin-auth";
 import { deletePost, updatePost } from "../data/blog";
 
-function isAdmin(sessionClaims: unknown): boolean {
-	const meta = (sessionClaims as { publicMetadata?: { role?: string } })
-		?.publicMetadata;
-	return meta?.role === "admin";
-}
-
 export async function action(args: Route.ActionArgs) {
-	const { userId, sessionClaims } = await getAuth(args);
-	if (!userId || !isAdmin(sessionClaims)) {
-		throw new Response("Forbidden", { status: 403 });
-	}
+	await requireAdmin(args);
 	const { id } = args.params;
 	if (!id) throw new Response("Bad request", { status: 400 });
 
-	const env = (args.context as {
+	const env = (args.context as unknown as {
 		cloudflare: { env: { DB: Parameters<typeof updatePost>[0] } };
 	}).cloudflare.env;
 
 	if (args.request.method === "DELETE") {
 		await deletePost(env.DB, id);
-		throw redirect(303, "/admin");
+		throw redirect("/admin", { status: 303 });
 	}
 
 	if (args.request.method === "PUT" || args.request.method === "PATCH") {
@@ -40,7 +31,7 @@ export async function action(args: Route.ActionArgs) {
 			...(content !== undefined && { content }),
 			...(status !== undefined && { status }),
 		});
-		throw redirect(303, "/admin");
+		throw redirect("/admin", { status: 303 });
 	}
 
 	throw new Response("Method not allowed", { status: 405 });

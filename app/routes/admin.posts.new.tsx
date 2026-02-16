@@ -1,20 +1,11 @@
-import { getAuth } from "@clerk/react-router/server";
 import { Link } from "react-router";
 import { useState } from "react";
 import type { Route } from "./+types/admin.posts.new";
+import { requireAdmin } from "../lib/admin-auth";
 import { PostEditor, type PostEditorValues } from "../components/PostEditor";
 
-function isAdmin(sessionClaims: unknown): boolean {
-	const meta = (sessionClaims as { publicMetadata?: { role?: string } })
-		?.publicMetadata;
-	return meta?.role === "admin";
-}
-
 export async function loader(args: Route.LoaderArgs) {
-	const { userId, sessionClaims } = await getAuth(args);
-	if (!userId || !isAdmin(sessionClaims)) {
-		throw new Response("Forbidden", { status: 403 });
-	}
+	await requireAdmin(args);
 	return {};
 }
 
@@ -53,14 +44,7 @@ export default function AdminPostsNew() {
 				<input type="hidden" name="excerpt" value={values.excerpt} />
 				<input type="hidden" name="content" value={values.content} />
 				<input type="hidden" name="status" value={values.status} />
-				<PostEditor values={values} onChange={setValues} submitLabel="Create">
-					<button
-						type="submit"
-						className="font-mono text-sm text-[var(--terminal-bg)] bg-[var(--terminal-accent)] px-4 py-2 rounded hover:opacity-90"
-					>
-						Create post
-					</button>
-				</PostEditor>
+				<PostEditor values={values} onChange={setValues} submitLabel="Create post" />
 			</form>
 		</div>
 	);

@@ -92,6 +92,8 @@ Blog posts are stored in Cloudflare D1 (SQLite). The admin dashboard at `/admin`
    Or `export CLOUDFLARE_API_TOKEN=your_token_here && make db-setup-remote`. You can run `make db-migrate` then `make db-seed` separately; both use the DB in `wrangler.json`.
 4. Run `npm run cf-typegen` after any `wrangler.json` change.
 
+**Verify deployment (Workers & Pages):** In the Cloudflare dashboard, open your Worker → **Bindings**. Confirm a **D1** binding named **DB** is attached and points to **tokenoverflow-blog** (or the same `database_id` as in `wrangler.json`). If the binding is missing, the app can 500 when loading `/` or `/blog`. Also ensure **Variables** `VITE_CLERK_PUBLISHABLE_KEY` and `CLERK_PUBLISHABLE_KEY` are set to your Clerk publishable key (not empty); empty values in logs will break Clerk and can cause 500s.
+
 For **local dev**, `npm run dev` uses a local D1 database. First-time setup: run `make db-setup-local` (creates the `posts` table and seeds sample posts). If you only need the table, run `make db-migrate-local`; run `make db-seed-local` only after the table exists.
 
 ## Newsletter (Subscribe)
