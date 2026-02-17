@@ -6,6 +6,7 @@ export default [
 	route("projects", "routes/projects.tsx"),
 	route("blog", "routes/blog.tsx"),
 	route("blog/:slug", "routes/blog.$slug.tsx"),
+	route("cloak", "routes/cloak.tsx"),
 	route("api/subscribe", "routes/api.subscribe.tsx"),
 	route("admin", "routes/admin.tsx"),
 	route("admin/posts/new", "routes/admin.posts.new.tsx"),

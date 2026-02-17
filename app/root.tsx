@@ -35,7 +35,7 @@ export const links: Route.LinksFunction = () => [
 	},
 	{
 		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap",
+		href: "https://fonts.googleapis.com/css2?family=Bangers&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap",
 	},
 ];
 
@@ -48,7 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body className="flex flex-col min-h-screen">
+			<body className="flex flex-col min-h-screen font-sans bg-comic-white text-comic-black">
 				{children}
 				<ScrollRestoration />
 				<Scripts />
@@ -94,11 +94,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 	}
 
 	return (
-		<main className="max-w-3xl mx-auto px-4 py-16 font-mono text-[var(--terminal-text)]">
-			<h1 className="text-xl text-[var(--terminal-accent)]">{message}</h1>
-			<p className="text-sm text-[var(--terminal-text-muted)] mt-2">{details}</p>
+		<main className="max-w-3xl mx-auto px-4 py-16">
+			<h1 className="comic-heading text-2xl text-comic-black">{message}</h1>
+			<p className="text-sm text-comic-gray-medium mt-2">{details}</p>
 			{stack && (
-				<pre className="w-full p-4 mt-4 overflow-x-auto text-xs rounded border border-[var(--terminal-border)] bg-[var(--terminal-bg)]">
+				<pre className="w-full p-4 mt-4 overflow-x-auto text-xs font-mono border-[3px] border-comic-black bg-comic-gray text-comic-black">
 					<code>{stack}</code>
 				</pre>
 			)}

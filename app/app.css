@@ -5,22 +5,95 @@
 		"Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
 		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	--font-mono: "JetBrains Mono", ui-monospace, monospace;
+	/* Comic + nerdy display font */
+	--font-display: "Bangers", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+	/* Comic palette */
+	--color-comic-yellow: #FFD600;
+	--color-comic-yellow-hover: #E6C100;
+	--color-comic-black: #000000;
+	--color-comic-white: #FFFFFF;
+	--color-comic-gray: #F5F5F5;
+	--color-comic-gray-dark: #333333;
+	--color-comic-gray-medium: #666666;
+	--color-comic-gray-light: #999999;
+
+	/* Thick comic borders */
+	--border-3: 3px;
+
+	/* Offset comic shadows */
+	--shadow-comic: 4px 4px 0 0 #000000;
+	--shadow-comic-sm: 2px 2px 0 0 #000000;
+	--shadow-comic-hover: 6px 6px 0 0 #000000;
+	--shadow-comic-active: 1px 1px 0 0 #000000;
 }
 
-/* Terminal theme - dark first */
-:root {
-	--terminal-bg: #0d1117;
-	--terminal-text: #e6edf3;
-	--terminal-text-muted: #8b949e;
-	--terminal-border: #30363d;
-	--terminal-accent: #58a6ff;
-	--terminal-green: #3fb950;
+/* Comic utility classes */
+@layer components {
+	.comic-card {
+		@apply bg-comic-white border-[3px] border-comic-black;
+		box-shadow: var(--shadow-comic);
+	}
+
+	.comic-card-hover {
+		@apply bg-comic-white border-[3px] border-comic-black transition-all duration-200;
+		box-shadow: var(--shadow-comic);
+	}
+
+	.comic-card-hover:hover {
+		box-shadow: var(--shadow-comic-hover);
+		transform: translateY(-4px);
+	}
+
+	.comic-btn {
+		@apply bg-comic-yellow text-comic-black font-display font-bold uppercase
+			border-[3px] border-comic-black px-6 py-3 tracking-wide cursor-pointer
+			transition-all duration-150;
+		box-shadow: var(--shadow-comic);
+	}
+
+	.comic-btn:hover {
+		@apply bg-comic-yellow-hover;
+		box-shadow: var(--shadow-comic-hover);
+		transform: translateY(-2px);
+	}
+
+	.comic-btn:active {
+		box-shadow: var(--shadow-comic-active);
+		transform: translateY(2px);
+	}
+
+	.comic-btn-outline {
+		@apply bg-comic-white text-comic-black font-display font-bold uppercase
+			border-[3px] border-comic-black px-5 py-2.5 cursor-pointer
+			transition-all duration-150;
+		box-shadow: var(--shadow-comic-sm);
+	}
+
+	.comic-btn-outline:hover {
+		@apply bg-comic-yellow;
+	}
+
+	.comic-heading {
+		@apply font-display font-bold uppercase tracking-tight;
+	}
+
+	.yellow-highlight {
+		@apply bg-comic-yellow px-2 py-0.5 inline-block;
+	}
 }
 
-html,
+html {
+	scroll-behavior: smooth;
+}
+
 body {
-	background-color: var(--terminal-bg);
-	color: var(--terminal-text);
-	color-scheme: dark;
+	background-color: var(--color-comic-white);
+	color: var(--color-comic-black);
 	min-height: 100vh;
+}
+
+/* Nerdy terminal-style accent (for code/mono bits) */
+.nerdy-accent {
+	color: #0d9488;
 }

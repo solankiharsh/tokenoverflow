@@ -31,12 +31,12 @@ export default function AdminPostsNew() {
 		<div className="max-w-3xl mx-auto px-4 py-12">
 			<Link
 				to="/admin"
-				className="font-mono text-sm text-[var(--terminal-text-muted)] hover:text-[var(--terminal-accent)] hover:underline mb-6 inline-block"
+				className="font-display font-bold text-sm text-comic-gray-medium hover:text-comic-yellow transition mb-6 inline-block"
 			>
-				← admin
+				← ADMIN
 			</Link>
-			<h1 className="font-mono text-2xl text-[var(--terminal-accent)] mb-6">
-				~/$ New post
+			<h1 className="comic-heading text-2xl text-comic-black mb-6">
+				NEW POST
 			</h1>
 			<form method="post" action="/api/admin/posts" className="space-y-6">
 				<input type="hidden" name="slug" value={values.slug} />

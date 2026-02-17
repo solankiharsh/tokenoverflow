@@ -15,43 +15,50 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
 	return (
 		<div className="max-w-3xl mx-auto px-4 py-16 sm:py-24">
-			<pre className="font-mono text-xs text-[var(--terminal-text-muted)] mb-4">
+			{/* Nerdy terminal line */}
+			<pre className="font-mono text-xs text-comic-gray-medium mb-4">
 				{`harsh@tokenoverflow ~ $ whoami`}
 			</pre>
-			<h1 className="font-mono text-3xl sm:text-4xl text-[var(--terminal-text)] mb-4">
-				Harsh Solanki
+			<h1 className="comic-heading text-4xl sm:text-5xl text-comic-black mb-4 leading-tight">
+				HARSH <span className="yellow-highlight">SOLANKI</span>
 			</h1>
-			<p className="font-mono text-lg text-[var(--terminal-green)] mb-6">
+			<p className="font-mono text-lg text-comic-gray-dark mb-4">
 				Building AI products until they learn to build themselves.
 			</p>
-			<p className="text-[var(--terminal-text-muted)] mb-8 max-w-xl">
+			<p className="text-comic-gray-medium mb-8 max-w-xl">
 				Engineering Lead — Applied AI at Deriv. 9+ years. 3× AWS certified.
 				Educator. Professional introvert who writes to learn.
 			</p>
-			<nav className="flex flex-wrap gap-4 font-mono text-sm">
+			<nav className="flex flex-wrap gap-3">
 				<Link
 					to="/about"
-					className="text-[var(--terminal-accent)] hover:underline"
+					className="comic-btn-outline text-sm py-2 px-4 no-underline"
 				>
-					~/$ about
+					ABOUT
 				</Link>
 				<Link
 					to="/projects"
-					className="text-[var(--terminal-accent)] hover:underline"
+					className="comic-btn-outline text-sm py-2 px-4 no-underline"
 				>
-					~/$ projects
+					PROJECTS
 				</Link>
 				<Link
 					to="/blog"
-					className="text-[var(--terminal-accent)] hover:underline"
+					className="comic-btn-outline text-sm py-2 px-4 no-underline"
 				>
-					~/$ blog
+					BLOG
+				</Link>
+				<Link
+					to="/cloak"
+					className="comic-btn text-sm py-2 px-4 no-underline"
+				>
+					CLOAK
 				</Link>
 				<a
 					href="#subscribe"
-					className="text-[var(--terminal-accent)] hover:underline"
+					className="comic-btn-outline text-sm py-2 px-4 no-underline"
 				>
-					~/$ subscribe
+					SUBSCRIBE
 				</a>
 			</nav>
 		</div>
