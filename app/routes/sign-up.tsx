@@ -12,7 +12,7 @@ export function meta(_args: Route.MetaArgs) {
 export default function SignUpPage() {
 	return (
 		<div className="min-h-[60vh] flex items-center justify-center px-4 py-12">
-			<div className="w-full max-w-md rounded border border-[var(--terminal-border)] bg-[var(--terminal-bg)] p-4 shadow-lg">
+			<div className="w-full max-w-md border-[3px] border-comic-black bg-comic-white p-4 shadow-[4px_4px_0_0_#000]">
 				<SignUp
 					appearance={terminalAppearance}
 					routing="path"

@@ -7,6 +7,13 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		title: "Cloak",
+		description:
+			"Invisible AI assistant for meetings and calls. Real-time transcription, call summaries, Google Calendar, knowledge base. Download for macOS.",
+		href: "/cloak",
+		tech: ["Tauri", "React", "AI"],
+	},
+	{
 		title: "NLP Sentiment Analysis (Finance)",
 		description:
 			"What makes a Finance Minister's speech stand out? Sentiment analysis on financial speeches using AI-NLP.",

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useFetcher } from "react-router";
 import { useState } from "react";
 import type { Route } from "./+types/admin.posts.new";
 import { requireAdmin } from "../lib/admin-auth";
@@ -26,25 +26,41 @@ const initial: PostEditorValues = {
 
 export default function AdminPostsNew() {
 	const [values, setValues] = useState<PostEditorValues>(initial);
+	const fetcher = useFetcher();
 
 	return (
 		<div className="max-w-3xl mx-auto px-4 py-12">
 			<Link
 				to="/admin"
-				className="font-mono text-sm text-[var(--terminal-text-muted)] hover:text-[var(--terminal-accent)] hover:underline mb-6 inline-block"
+				className="font-display font-bold text-sm text-comic-gray-medium hover:text-comic-yellow transition mb-6 inline-block"
 			>
-				← admin
+				← ADMIN
 			</Link>
-			<h1 className="font-mono text-2xl text-[var(--terminal-accent)] mb-6">
-				~/$ New post
+			<h1 className="comic-heading text-2xl text-comic-black mb-6">
+				NEW POST
 			</h1>
-			<form method="post" action="/api/admin/posts" className="space-y-6">
-				<input type="hidden" name="slug" value={values.slug} />
-				<input type="hidden" name="title" value={values.title} />
-				<input type="hidden" name="excerpt" value={values.excerpt} />
-				<input type="hidden" name="content" value={values.content} />
-				<input type="hidden" name="status" value={values.status} />
-				<PostEditor values={values} onChange={setValues} submitLabel="Create post" />
+			<form
+				className="space-y-6"
+				onSubmit={(e) => {
+					e.preventDefault();
+					const formData = new FormData();
+					formData.set("slug", values.slug);
+					formData.set("title", values.title);
+					formData.set("excerpt", values.excerpt);
+					formData.set("content", values.content);
+					formData.set("status", values.status);
+					fetcher.submit(formData, {
+						method: "POST",
+						action: "/api/admin/posts",
+					});
+				}}
+			>
+				<PostEditor
+					values={values}
+					onChange={setValues}
+					submitLabel="Create post"
+					isSubmitting={fetcher.state !== "idle"}
+				/>
 			</form>
 		</div>
 	);

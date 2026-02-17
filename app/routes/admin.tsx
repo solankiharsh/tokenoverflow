@@ -25,45 +25,46 @@ export default function Admin({ loaderData }: Route.ComponentProps) {
 
 	return (
 		<div className="max-w-3xl mx-auto px-4 py-12">
-			<h1 className="font-mono text-2xl text-[var(--terminal-accent)] mb-2">
+			<pre className="font-mono text-xs text-comic-gray-medium mb-2">
 				~/$ admin
-			</h1>
-			<p className="text-sm text-[var(--terminal-text-muted)] mb-6">
+			</pre>
+			<h1 className="comic-heading text-2xl text-comic-black mb-2">ADMIN</h1>
+			<p className="text-sm text-comic-gray-medium mb-6">
 				Manage blog posts. Drafts are hidden from the public blog.
 			</p>
 			<Link
 				to="/admin/posts/new"
-				className="inline-block font-mono text-sm text-[var(--terminal-bg)] bg-[var(--terminal-accent)] px-3 py-2 rounded hover:opacity-90 mb-6"
+				className="comic-btn text-sm py-2 px-4 inline-block mb-6 no-underline"
 			>
-				+ New post
+				+ NEW POST
 			</Link>
 			<ul className="space-y-4">
 				{posts.map((post) => (
 					<li
 						key={post.id}
-						className="rounded border border-[var(--terminal-border)] p-4 flex flex-wrap items-center justify-between gap-2"
+						className="comic-card p-4 flex flex-wrap items-center justify-between gap-2"
 					>
 						<div>
-							<span className="font-mono text-xs text-[var(--terminal-text-muted)] mr-2">
+							<span className="font-mono text-xs text-comic-gray-medium mr-2">
 								[{post.status}]
 							</span>
-							<span className="font-mono text-[var(--terminal-accent)]">
+							<span className="font-display font-bold text-comic-black">
 								{post.title}
 							</span>
-							<span className="text-[var(--terminal-text-muted)] text-sm ml-2">
+							<span className="text-comic-gray-medium text-sm ml-2">
 								{post.date}
 							</span>
 						</div>
 						<div className="flex gap-2">
 							<Link
 								to={`/admin/posts/${post.id}/edit`}
-								className="font-mono text-xs text-[var(--terminal-accent)] hover:underline"
+								className="comic-btn-outline text-xs py-1.5 px-3 no-underline"
 							>
-								Edit
+								EDIT
 							</Link>
 							<button
 								type="button"
-								className="font-mono text-xs text-red-400 hover:underline disabled:opacity-50"
+								className="font-display font-bold text-sm text-red-600 hover:underline disabled:opacity-50"
 								disabled={deleteFetcher.state !== "idle"}
 								onClick={() => {
 									if (!confirm("Delete this post?")) return;
@@ -73,14 +74,14 @@ export default function Admin({ loaderData }: Route.ComponentProps) {
 									});
 								}}
 							>
-								{deleteFetcher.state !== "idle" ? "…" : "Delete"}
+								{deleteFetcher.state !== "idle" ? "…" : "DELETE"}
 							</button>
 						</div>
 					</li>
 				))}
 			</ul>
 			{posts.length === 0 && (
-				<p className="text-[var(--terminal-text-muted)] text-sm">
+				<p className="text-comic-gray-medium text-sm">
 					No posts yet. Create one above.
 				</p>
 			)}

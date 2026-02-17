@@ -16,7 +16,7 @@ export function SubscribeForm() {
 		<fetcher.Form
 			method="post"
 			action="/api/subscribe"
-			className="flex flex-wrap gap-2"
+			className="flex flex-wrap gap-2 items-center"
 		>
 			<input
 				type="email"
@@ -26,23 +26,23 @@ export function SubscribeForm() {
 				placeholder="you@example.com"
 				required
 				disabled={isSubmitting}
-				className="font-mono text-sm px-3 py-2 rounded border border-[var(--terminal-border)] bg-[var(--terminal-bg)] text-[var(--terminal-text)] placeholder:text-[var(--terminal-text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--terminal-accent)] disabled:opacity-50 min-w-[200px]"
+				className="font-mono text-sm px-4 py-2.5 border-[3px] border-comic-black bg-comic-white text-comic-black placeholder-comic-gray-light focus:outline-none focus:ring-2 focus:ring-comic-yellow min-w-[200px] disabled:opacity-50"
 				aria-label="Email for newsletter"
 			/>
 			<button
 				type="submit"
 				disabled={isSubmitting}
-				className="font-mono text-sm px-4 py-2 rounded bg-[var(--terminal-accent)] text-[var(--terminal-bg)] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--terminal-accent)] focus:ring-offset-2 focus:ring-offset-[var(--terminal-bg)] disabled:opacity-50"
+				className="comic-btn text-sm py-2.5 px-5 disabled:opacity-50"
 			>
-				{isSubmitting ? "..." : "Subscribe"}
+				{isSubmitting ? "..." : "SUBSCRIBE"}
 			</button>
 			{isSuccess && (
-				<span className="font-mono text-sm text-[var(--terminal-green)] self-center">
+				<span className="font-display font-bold text-sm text-comic-gray-dark self-center">
 					✓ Subscribed.
 				</span>
 			)}
 			{error && (
-				<span className="font-mono text-sm text-red-400 self-center">
+				<span className="font-mono text-sm text-red-600 self-center">
 					{error}
 				</span>
 			)}
