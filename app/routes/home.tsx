@@ -25,9 +25,17 @@ export default function Home() {
 			<p className="font-mono text-lg text-comic-gray-dark mb-4">
 				Building AI products until they learn to build themselves.
 			</p>
-			<p className="text-comic-gray-medium mb-8 max-w-xl">
+			<p className="text-comic-gray-medium mb-4 max-w-xl">
 				Engineering Lead — Applied AI at Deriv. 9+ years. 3× AWS certified.
 				Educator. Professional introvert who writes to learn.
+			</p>
+			<p className="text-comic-gray-dark text-sm mb-8 space-x-4">
+				<Link to="/about#ai-impact" className="font-mono hover:text-comic-yellow transition underline">
+					→ AI leadership & impact at Deriv
+				</Link>
+				<Link to="/about#extracurriculars" className="font-mono hover:text-comic-yellow transition underline">
+					→ Speaking & videos
+				</Link>
 			</p>
 			<nav className="flex flex-wrap gap-3">
 				<Link

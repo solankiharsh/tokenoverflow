@@ -13,8 +13,10 @@ export async function loader(args: Route.LoaderArgs) {
 		const post = await getPost(env.DB, args.params.slug);
 		if (!post) throw new Response("Not found", { status: 404 });
 		return { post };
-	} catch {
-		throw new Response("Not found", { status: 404 });
+	} catch (err) {
+		if (err instanceof Response) throw err;
+		console.error("[blog.$slug] loader error:", err);
+		throw new Response("Internal server error", { status: 500 });
 	}
 }
 

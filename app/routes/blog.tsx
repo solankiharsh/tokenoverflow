@@ -13,8 +13,8 @@ export async function loader(args: Route.LoaderArgs) {
 		const posts = await getPosts(env.DB);
 		return { posts };
 	} catch (err) {
-		console.warn("[blog] D1 query failed (run local migrations: make db-migrate-local).", err);
-		return { posts: [] };
+		console.error("[blog] D1 query failed:", err);
+		throw new Response("Internal server error", { status: 500 });
 	}
 }
 

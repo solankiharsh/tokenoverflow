@@ -97,3 +97,12 @@ body {
 .nerdy-accent {
 	color: #0d9488;
 }
+
+/* Cloak page: readable body text (sans-serif, comfortable size and line-height) */
+.cloak-body {
+	font-family: var(--font-sans);
+	font-weight: 500;
+	font-size: 1rem;
+	line-height: 1.6;
+	letter-spacing: 0.01em;
+}
