@@ -2,17 +2,33 @@ import { Link } from "react-router";
 import type { Route } from "./+types/blog";
 import { loadContextKey } from "../lib/load-context";
 import { getPosts } from "../data/blog";
+import { externalPosts } from "../data/external-posts";
 
 export async function loader(args: Route.LoaderArgs) {
 	const env = args.context.get(loadContextKey).cloudflare.env as { DB?: Parameters<typeof getPosts>[0] };
 	if (!env?.DB) {
 		console.warn("[blog] D1 DB binding not available (e.g. local dev without migrations). Returning empty posts.");
-		return { posts: [] };
+		return { posts: [], externalPosts };
 	}
 	try {
 		const posts = await getPosts(env.DB);
-		return { posts };
+		return { posts, externalPosts };
 	} catch (err) {
+		const message = err instanceof Error ? err.message : String(err);
+		const causeMessage =
+			err instanceof Error && err.cause instanceof Error
+				? err.cause.message
+				: "";
+		const isMissingTable =
+			message.includes("no such table") ||
+			message.includes("SQLITE_ERROR") ||
+			causeMessage.includes("no such table");
+		if (isMissingTable) {
+			console.warn(
+				"[blog] D1 posts table missing (run: wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0001_create_posts.sql). Returning empty posts.",
+			);
+			return { posts: [], externalPosts };
+		}
 		console.error("[blog] D1 query failed:", err);
 		throw new Response("Internal server error", { status: 500 });
 	}
@@ -29,7 +45,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Blog({ loaderData }: Route.ComponentProps) {
-	const { posts } = loaderData;
+	const { posts, externalPosts } = loaderData;
 	return (
 		<div className="max-w-3xl mx-auto px-4 py-12">
 			<pre className="font-mono text-xs text-comic-gray-medium mb-2">
@@ -61,6 +77,37 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 					</li>
 				))}
 			</ul>
+			{externalPosts.length > 0 && (
+				<section className="mt-12 pt-8 border-t-2 border-comic-black">
+					<h2 className="comic-heading text-xl text-comic-black mb-4">
+						Also on Medium
+					</h2>
+					<ul className="space-y-4">
+						{externalPosts.map((post, i) => (
+							<li key={post.url + i}>
+								<a
+									href={post.url}
+									target="_blank"
+									rel="noreferrer"
+									className="comic-card-hover p-5 block group no-underline"
+								>
+									<h3 className="comic-heading text-lg text-comic-black group-hover:text-comic-yellow transition mb-1">
+										{post.title}
+									</h3>
+									{post.date && (
+										<p className="text-xs text-comic-gray-medium mb-2 font-mono">
+											{post.date}
+										</p>
+									)}
+									<span className="font-display font-bold text-sm text-comic-black group-hover:text-comic-yellow transition inline-block">
+										Read on Medium →
+									</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)}
 		</div>
 	);
 }

@@ -7,14 +7,4 @@ Writing forces me to structure the mess in my head. If I can''t write it clearly
 
 **No servers were harmed** in the making of this habit—just a lot of markdown and the occasional over-engineered diagram.
 
-If you''re the same way, you''re in good company. Write the doc. Explain it to the rubber duck. Then ship.', 'published', '2025-02-16T00:00:00.000Z', '2025-02-16T00:00:00.000Z'),
-('a1b2c3d4e5f60002', 'rag-in-5-minutes', 'RAG in 5 Minutes', 'Retrieval-Augmented Generation without the buzzword soup.', '**RAG** = get the right chunks of your data, stuff them into the prompt, let the model answer. That''s it.
-
-1. **Chunk** your docs (by paragraph or section).
-2. **Embed** chunks with an embedding model; store in a vector DB.
-3. **Query**: embed the user question, find the k nearest chunks.
-4. **Prompt**: "Here''s the context: … Now answer: …"
-
-You''re not fine-tuning. You''re not retraining. You''re just giving the model the right context so it doesn''t hallucinate your internal wiki.
-
-I''ve built and shipped RAG pipelines at scale (ingestion, retries, quotas, the works). The hard part is usually ops and data quality, not the algorithm. More on that in a future post.', 'published', '2025-02-15T00:00:00.000Z', '2025-02-15T00:00:00.000Z');
+If you''re the same way, you''re in good company. Write the doc. Explain it to the rubber duck. Then ship.', 'published', '2025-02-16T00:00:00.000Z', '2025-02-16T00:00:00.000Z');

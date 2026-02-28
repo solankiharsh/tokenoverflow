@@ -23,7 +23,21 @@ export const projects: Project[] = [
 	{
 		title: "tokenoverflow",
 		description: "This portfolio. React Router + Cloudflare Workers.",
-		href: null,
+		href: "https://github.com/solankiharsh/tokenoverflow",
 		tech: ["React", "Cloudflare", "TypeScript"],
+	},
+	{
+		title: "OpenClaw",
+		description:
+			"Multi-chain AI agent trading arena. Autonomous agents trade on Solana and BSC, earn on-chain rewards, real-time leaderboard and trade recommendations.",
+		href: "https://openclaw-trading-d3yx.vercel.app/",
+		tech: ["Bun", "Hono", "Next.js", "Solana", "PostgreSQL"],
+	},
+	{
+		title: "Creative Forge",
+		description:
+			"Open-source AI design agent. Multimodal generation (images, video, designs), infinite canvas, template system, multi-provider support. Privacy-first.",
+		href: "https://github.com/solankiharsh/creative-forge",
+		tech: ["FastAPI", "React", "LangGraph", "Supabase", "Excalidraw"],
 	},
 ];

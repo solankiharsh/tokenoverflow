@@ -43,6 +43,7 @@
 		"check": "tsc && react-router build && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
 		"dev": "react-router dev",
+		"db:migrate:local": "wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0001_create_posts.sql && wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0002_seed_posts.sql && wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0003_remove_rag_post.sql",
 		"preview": "npm run build && vite preview",
 		"typecheck": "npm run typegen && tsc -b"
 	},
