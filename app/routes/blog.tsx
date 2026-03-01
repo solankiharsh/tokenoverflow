@@ -19,13 +19,14 @@ export async function loader(args: Route.LoaderArgs) {
 			err instanceof Error && err.cause instanceof Error
 				? err.cause.message
 				: "";
-		const isMissingTable =
+		const isD1Error =
 			message.includes("no such table") ||
 			message.includes("SQLITE_ERROR") ||
+			message.includes("Failed query") ||
 			causeMessage.includes("no such table");
-		if (isMissingTable) {
+		if (isD1Error) {
 			console.warn(
-				"[blog] D1 posts table missing (run: wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0001_create_posts.sql). Returning empty posts.",
+				"[blog] D1 query failed (e.g. migrations not run). Returning empty posts. Run: wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0001_create_posts.sql",
 			);
 			return { posts: [], externalPosts };
 		}

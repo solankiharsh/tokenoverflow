@@ -15,6 +15,20 @@ export async function loader(args: Route.LoaderArgs) {
 		return { post };
 	} catch (err) {
 		if (err instanceof Response) throw err;
+		const message = err instanceof Error ? err.message : String(err);
+		const causeMessage =
+			err instanceof Error && err.cause instanceof Error
+				? (err.cause as Error).message
+				: "";
+		const isD1Error =
+			message.includes("no such table") ||
+			message.includes("SQLITE_ERROR") ||
+			message.includes("Failed query") ||
+			causeMessage.includes("no such table");
+		if (isD1Error) {
+			console.warn("[blog.$slug] D1 query failed (e.g. migrations not run). Returning 404.");
+			throw new Response("Not found", { status: 404 });
+		}
 		console.error("[blog.$slug] loader error:", err);
 		throw new Response("Internal server error", { status: 500 });
 	}
