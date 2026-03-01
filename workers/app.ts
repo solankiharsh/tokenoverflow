@@ -41,10 +41,10 @@ export default {
 		const url = new URL(request.url);
 		const debug = url.searchParams.has("debug") || request.headers.get("X-Debug") === "1";
 		const requestContext = new RouterContextProvider();
-		requestContext.set(loadContextKey, {
-			cloudflare: { env, ctx },
-			debug,
-		});
+		const cloudflare = { env, ctx };
+		requestContext.set(loadContextKey, { cloudflare, debug });
+		// Expose cloudflare.env so Clerk's getEnvVariable (context.cloudflare.env) finds CLERK_* keys
+		(requestContext as unknown as { cloudflare: typeof cloudflare }).cloudflare = cloudflare;
 		try {
 			const response = await requestHandler(request, requestContext);
 			if (response.status === 500 && debug) {

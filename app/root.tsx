@@ -17,14 +17,24 @@ import { terminalAppearance } from "./lib/clerk-appearance";
 import { loadContextKey } from "./lib/load-context";
 import "./app.css";
 
+type ClerkEnv = {
+	CLERK_SECRET_KEY?: string;
+	CLERK_PUBLISHABLE_KEY?: string;
+	VITE_CLERK_PUBLISHABLE_KEY?: string;
+};
+
 export const middleware = [clerkMiddleware()] as unknown as Route.MiddlewareFunction[];
 export async function loader(args: Route.LoaderArgs) {
-	const auth = await rootAuthLoader(args);
 	const loadContext = args.context.get(loadContextKey);
-	const debug = loadContext?.debug ?? false;
-	const env = loadContext?.cloudflare?.env as { CLERK_PUBLISHABLE_KEY?: string; VITE_CLERK_PUBLISHABLE_KEY?: string } | undefined;
+	const env = loadContext?.cloudflare?.env as ClerkEnv | undefined;
+	const secretKey = env?.CLERK_SECRET_KEY ?? "";
 	const publishableKey =
-		env?.CLERK_PUBLISHABLE_KEY ?? env?.VITE_CLERK_PUBLISHABLE_KEY ?? "";
+		env?.CLERK_PUBLISHABLE_KEY ??
+		env?.VITE_CLERK_PUBLISHABLE_KEY ??
+		(typeof import.meta !== "undefined" && import.meta.env?.VITE_CLERK_PUBLISHABLE_KEY) ??
+		"";
+	const auth = await rootAuthLoader(args, { secretKey, publishableKey });
+	const debug = loadContext?.debug ?? false;
 	const data = typeof auth === "object" && auth !== null ? auth : {};
 	return { ...data, debug, publishableKey };
 }
