@@ -22,8 +22,11 @@ export async function loader(args: Route.LoaderArgs) {
 	const auth = await rootAuthLoader(args);
 	const loadContext = args.context.get(loadContextKey);
 	const debug = loadContext?.debug ?? false;
+	const env = loadContext?.cloudflare?.env as { CLERK_PUBLISHABLE_KEY?: string; VITE_CLERK_PUBLISHABLE_KEY?: string } | undefined;
+	const publishableKey =
+		env?.CLERK_PUBLISHABLE_KEY ?? env?.VITE_CLERK_PUBLISHABLE_KEY ?? "";
 	const data = typeof auth === "object" && auth !== null ? auth : {};
-	return { ...data, debug };
+	return { ...data, debug, publishableKey };
 }
 
 export const links: Route.LinksFunction = () => [
@@ -58,9 +61,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App({ loaderData }: Route.ComponentProps) {
+	const publishableKey =
+		loaderData?.publishableKey ?? import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? "";
 	return (
 		<ClerkProvider
-			publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ?? ""}
+			publishableKey={publishableKey}
 			loaderData={loaderData}
 			appearance={terminalAppearance}
 			afterSignOutUrl="/"
