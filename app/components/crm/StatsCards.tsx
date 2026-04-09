@@ -46,23 +46,23 @@ export function StatsCards({
 		<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
 			{cards.map((card) => (
 				<div key={card.label} className="comic-card p-4 text-center">
-					<p className="font-mono text-xs text-comic-gray-medium">
+					<p className="font-mono text-xs text-volt-steel">
 						{card.label}
 					</p>
-					<p className="font-display font-bold text-2xl text-comic-black mt-1">
+					<p className="font-display font-bold text-2xl text-volt-snow mt-1">
 						{card.value}
 					</p>
 				</div>
 			))}
 			{pipeline.map((stage) => (
 				<div key={stage.stage} className="comic-card p-3 text-center">
-					<p className="font-mono text-xs text-comic-gray-medium uppercase">
+					<p className="font-mono text-xs text-volt-steel uppercase">
 						{STAGE_LABELS[stage.stage] ?? stage.stage}
 					</p>
-					<p className="font-display font-bold text-lg text-comic-black">
+					<p className="font-display font-bold text-lg text-volt-snow">
 						{stage.count}
 					</p>
-					<p className="font-mono text-xs text-comic-gray-medium">
+					<p className="font-mono text-xs text-volt-steel">
 						{formatCurrency(stage.totalValue)}
 					</p>
 				</div>

@@ -4,20 +4,20 @@ import type { BlogPost } from "../../data/blog";
 export function LandingBlogTeaser({ posts }: { posts: BlogPost[] }) {
 	if (posts.length === 0) {
 		return (
-			<section className="landing-section-muted py-20 sm:py-28 border-t border-white/[0.06]">
+			<section className="landing-section-muted py-20 sm:py-28 border-t border-volt-border">
 				<div className="max-w-6xl mx-auto px-4 text-center">
-					<p className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500 mb-3">
+					<p className="font-mono text-xs uppercase tracking-[0.28em] text-volt-steel mb-3">
 						From the blog
 					</p>
-					<h2 className="landing-heading text-2xl text-white mb-4">
+					<h2 className="landing-heading text-2xl text-volt-snow mb-4">
 						Writing to learn
 					</h2>
-					<p className="text-zinc-500 text-sm mb-6">
+					<p className="text-volt-steel text-sm mb-6 tracking-wide">
 						Publish a post in your D1 CMS — it will show up here automatically.
 					</p>
 					<Link
 						to="/blog"
-						className="inline-flex text-cyan-400 text-sm font-medium hover:underline"
+						className="inline-flex text-volt-mint text-sm font-medium hover:text-volt-green transition-colors"
 					>
 						Open blog →
 					</Link>
@@ -27,20 +27,20 @@ export function LandingBlogTeaser({ posts }: { posts: BlogPost[] }) {
 	}
 
 	return (
-		<section className="landing-section-muted py-20 sm:py-28 border-t border-white/[0.06]">
+		<section className="landing-section-muted py-20 sm:py-28 border-t border-volt-border">
 			<div className="max-w-6xl mx-auto px-4">
 				<div className="flex flex-wrap items-end justify-between gap-4 mb-10">
 					<div>
-						<p className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-400/90 mb-2">
+						<p className="font-mono text-xs uppercase tracking-[0.28em] text-volt-mint mb-2">
 							From the blog
 						</p>
-						<h2 className="landing-heading text-3xl text-white">
+						<h2 className="landing-heading text-3xl text-volt-snow">
 							Latest from D1
 						</h2>
 					</div>
 					<Link
 						to="/blog"
-						className="text-sm text-zinc-400 hover:text-white transition-colors"
+						className="text-sm text-volt-steel hover:text-volt-mint transition-colors"
 					>
 						View all →
 					</Link>
@@ -50,15 +50,15 @@ export function LandingBlogTeaser({ posts }: { posts: BlogPost[] }) {
 						<li key={post.slug}>
 							<Link
 								to={`/blog/${post.slug}`}
-								className="group block rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 hover:border-violet-500/25 hover:bg-white/[0.04] transition-all no-underline h-full"
+								className="group block rounded-lg border border-volt-border bg-volt-carbon p-5 hover:border-volt-green/40 transition-all no-underline h-full shadow-[0_0_15px_rgba(92,88,85,0.15)]"
 							>
-								<p className="font-mono text-[10px] text-zinc-500 mb-2">
+								<p className="font-mono text-[10px] text-volt-steel mb-2">
 									{post.date}
 								</p>
-								<h3 className="landing-heading text-lg text-white group-hover:text-cyan-300 transition-colors mb-2">
+								<h3 className="landing-heading text-lg text-volt-snow group-hover:text-volt-mint transition-colors mb-2">
 									{post.title}
 								</h3>
-								<p className="text-sm text-zinc-500 line-clamp-2">
+								<p className="text-sm text-volt-parchment line-clamp-2 tracking-wide">
 									{post.excerpt}
 								</p>
 							</Link>

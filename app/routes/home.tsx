@@ -38,7 +38,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 	const { recentPosts } = loaderData;
 
 	return (
-		<div className="bg-[#050508] text-zinc-100">
+		<div className="bg-volt-abyss text-volt-snow">
 			<LandingHero />
 			<LandingServices />
 			<LandingCaseStudies />

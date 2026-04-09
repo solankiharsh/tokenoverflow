@@ -50,18 +50,18 @@ export function DealCard({ deal, currentStage }: DealCardProps) {
 
 	return (
 		<div className="comic-card p-3 space-y-2">
-			<p className="font-display font-bold text-sm text-comic-black leading-tight">
+			<p className="font-display font-bold text-sm text-volt-snow leading-tight">
 				{deal.title}
 			</p>
 			<Link
 				to={`/admin/crm/contacts/${deal.contactId}`}
-				className="font-mono text-xs text-comic-gray-medium hover:text-comic-yellow transition no-underline block"
+				className="font-mono text-xs text-volt-steel hover:text-volt-green transition no-underline block"
 			>
 				{deal.contactFirstName} {deal.contactLastName ?? ""}{" "}
 				{deal.contactCompany ? `@ ${deal.contactCompany}` : ""}
 			</Link>
 			{deal.value != null && (
-				<p className="font-display font-bold text-comic-black">
+				<p className="font-display font-bold text-volt-snow">
 					{formatCurrency(deal.value, deal.currency)}
 				</p>
 			)}

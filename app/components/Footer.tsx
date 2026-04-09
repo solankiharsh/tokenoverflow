@@ -1,4 +1,3 @@
-import { useLocation } from "react-router";
 import { SubscribeForm } from "./SubscribeForm";
 
 const socials = [
@@ -12,59 +11,17 @@ const socials = [
 ];
 
 export function Footer() {
-	const location = useLocation();
-	const isLanding = location.pathname === "/";
-
-	if (isLanding) {
-		return (
-			<footer className="border-t border-white/10 bg-[#050508] text-zinc-300 mt-auto">
-				<div className="max-w-6xl mx-auto px-4 py-12">
-					<section id="subscribe" className="mb-10">
-						<h2 className="landing-heading text-lg text-white mb-2">
-							Subscribe
-						</h2>
-						<p className="text-zinc-500 text-sm mb-3 font-mono">
-							Occasional AI/ML notes — no spam.
-						</p>
-						<div className="max-w-md">
-							<SubscribeForm variant="dark" />
-						</div>
-					</section>
-					<div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-						{socials.map(({ href, label }) => (
-							<a
-								key={href}
-								href={href}
-								target="_blank"
-								rel="noreferrer"
-								className="font-heading font-semibold text-zinc-400 hover:text-white transition"
-							>
-								{label}
-							</a>
-						))}
-					</div>
-					<p className="mt-6 text-xs text-zinc-600 font-mono">
-						React Router · Cloudflare Workers · D1
-					</p>
-				</div>
-			</footer>
-		);
-	}
-
 	return (
-		<footer className="border-t-[3px] border-comic-black bg-comic-white mt-auto">
-			<div className="max-w-4xl mx-auto px-4 py-8">
-				<section id="subscribe" className="mb-8">
-					<h2 className="comic-heading text-lg mb-2">
-						<span className="yellow-highlight">SUBSCRIBE</span>
-					</h2>
-					<p className="text-comic-gray-medium text-sm mb-3 font-mono">
-						$ echo &quot;your@email.com&quot; &gt;&gt; subscribers.txt
+		<footer className="border-t border-volt-border bg-volt-abyss text-volt-fog mt-auto">
+			<div className="max-w-6xl mx-auto px-4 py-12">
+				<section id="subscribe" className="mb-10">
+					<h2 className="comic-heading text-lg text-volt-snow mb-2">Subscribe</h2>
+					<p className="text-volt-steel text-sm mb-3 font-mono">
+						Occasional AI/ML notes — no spam.
 					</p>
-					<p className="text-comic-gray-dark text-sm mb-3">
-						No spam. Occasional AI/ML nuggets. Unsubscribe anytime.
-					</p>
-					<SubscribeForm />
+					<div className="max-w-md">
+						<SubscribeForm />
+					</div>
 				</section>
 				<div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
 					{socials.map(({ href, label }) => (
@@ -73,14 +30,14 @@ export function Footer() {
 							href={href}
 							target="_blank"
 							rel="noreferrer"
-							className="font-display font-bold uppercase text-comic-black hover:text-comic-yellow transition"
+							className="font-medium text-volt-fog hover:text-white transition-colors"
 						>
 							{label}
 						</a>
 					))}
 				</div>
-				<p className="mt-4 text-xs text-comic-gray-medium font-mono">
-					Built with React Router + Cloudflare. No servers were harmed.
+				<p className="mt-6 text-xs text-volt-steel font-mono">
+					React Router · Cloudflare Workers · D1
 				</p>
 			</div>
 		</footer>

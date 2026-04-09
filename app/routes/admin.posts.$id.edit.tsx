@@ -47,11 +47,11 @@ export default function AdminPostsEdit({ loaderData }: Route.ComponentProps) {
 		<div className="max-w-3xl mx-auto px-4 py-12">
 			<Link
 				to="/admin"
-				className="font-display font-bold text-sm text-comic-gray-medium hover:text-comic-yellow transition mb-6 inline-block"
+				className="font-display font-bold text-sm text-volt-steel hover:text-volt-green transition mb-6 inline-block"
 			>
 				← ADMIN
 			</Link>
-			<h1 className="comic-heading text-2xl text-comic-black mb-6">
+			<h1 className="comic-heading text-2xl text-volt-snow mb-6">
 				EDIT: {post.title}
 			</h1>
 			<form

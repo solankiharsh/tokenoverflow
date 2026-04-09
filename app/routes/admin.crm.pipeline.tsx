@@ -31,11 +31,11 @@ export default function AdminCRMPipeline({ loaderData }: Route.ComponentProps) {
 				<div>
 					<Link
 						to="/admin/crm"
-						className="font-display font-bold text-sm text-comic-gray-medium hover:text-comic-yellow transition inline-block mb-2"
+						className="font-display font-bold text-sm text-volt-steel hover:text-volt-green transition inline-block mb-2"
 					>
 						← CRM
 					</Link>
-					<h1 className="comic-heading text-2xl text-comic-black">
+					<h1 className="comic-heading text-2xl text-volt-snow">
 						PIPELINE
 					</h1>
 				</div>

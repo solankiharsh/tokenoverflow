@@ -28,7 +28,7 @@ function timeAgo(iso: string): string {
 export function ActivityFeed({ activities }: ActivityFeedProps) {
 	if (activities.length === 0) {
 		return (
-			<p className="font-mono text-xs text-comic-gray-medium text-center py-4">
+			<p className="font-mono text-xs text-volt-steel text-center py-4">
 				No activities yet.
 			</p>
 		);
@@ -48,15 +48,15 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
 						</span>
 						<div className="min-w-0 flex-1">
 							<div className="flex items-baseline gap-2">
-								<span className="font-display font-bold text-sm text-comic-black">
+								<span className="font-display font-bold text-sm text-volt-snow">
 									{activity.title}
 								</span>
-								<span className="font-mono text-xs text-comic-gray-medium shrink-0">
+								<span className="font-mono text-xs text-volt-steel shrink-0">
 									{timeAgo(activity.createdAt)}
 								</span>
 							</div>
 							{activity.body && (
-								<p className="text-sm text-comic-gray-medium mt-0.5 line-clamp-2">
+								<p className="text-sm text-volt-steel mt-0.5 line-clamp-2">
 									{activity.body}
 								</p>
 							)}

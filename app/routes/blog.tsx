@@ -49,11 +49,11 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 	const { posts, externalPosts } = loaderData;
 	return (
 		<div className="max-w-3xl mx-auto px-4 py-12">
-			<pre className="font-mono text-xs text-comic-gray-medium mb-2">
+			<pre className="font-mono text-xs text-volt-steel mb-2">
 				~/$ ls blog/
 			</pre>
-			<h1 className="comic-heading text-3xl text-comic-black mb-2">BLOG</h1>
-			<p className="text-sm text-comic-gray-medium mb-8">
+			<h1 className="comic-heading text-3xl text-volt-snow mb-2">BLOG</h1>
+			<p className="text-sm text-volt-steel mb-8">
 				Occasional posts. Mostly for my future self.
 			</p>
 			<ul className="space-y-6">
@@ -61,16 +61,16 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 					<li key={post.slug}>
 						<article className="comic-card-hover p-5">
 							<Link to={`/blog/${post.slug}`} className="block group">
-								<h2 className="comic-heading text-xl text-comic-black group-hover:text-comic-yellow transition mb-1">
+								<h2 className="comic-heading text-xl text-volt-snow group-hover:text-volt-green transition mb-1">
 									{post.title}
 								</h2>
-								<p className="text-xs text-comic-gray-medium mb-2 font-mono">
+								<p className="text-xs text-volt-steel mb-2 font-mono">
 									{post.date}
 								</p>
-								<p className="text-sm text-comic-gray-medium">
+								<p className="text-sm text-volt-steel">
 									{post.excerpt}
 								</p>
-								<span className="font-display font-bold text-sm text-comic-black group-hover:text-comic-yellow transition mt-2 inline-block">
+								<span className="font-display font-bold text-sm text-volt-snow group-hover:text-volt-green transition mt-2 inline-block">
 									Read more →
 								</span>
 							</Link>
@@ -79,8 +79,8 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 				))}
 			</ul>
 			{externalPosts.length > 0 && (
-				<section className="mt-12 pt-8 border-t-2 border-comic-black">
-					<h2 className="comic-heading text-xl text-comic-black mb-4">
+				<section className="mt-12 pt-8 border-t-2 border-volt-border">
+					<h2 className="comic-heading text-xl text-volt-snow mb-4">
 						Also on Medium
 					</h2>
 					<ul className="space-y-4">
@@ -92,15 +92,15 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 									rel="noreferrer"
 									className="comic-card-hover p-5 block group no-underline"
 								>
-									<h3 className="comic-heading text-lg text-comic-black group-hover:text-comic-yellow transition mb-1">
+									<h3 className="comic-heading text-lg text-volt-snow group-hover:text-volt-green transition mb-1">
 										{post.title}
 									</h3>
 									{post.date && (
-										<p className="text-xs text-comic-gray-medium mb-2 font-mono">
+										<p className="text-xs text-volt-steel mb-2 font-mono">
 											{post.date}
 										</p>
 									)}
-									<span className="font-display font-bold text-sm text-comic-black group-hover:text-comic-yellow transition inline-block">
+									<span className="font-display font-bold text-sm text-volt-snow group-hover:text-volt-green transition inline-block">
 										Read on Medium →
 									</span>
 								</a>

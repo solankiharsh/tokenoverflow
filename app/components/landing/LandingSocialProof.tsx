@@ -1,31 +1,31 @@
 export function LandingSocialProof() {
 	return (
-		<section className="landing-section-dark py-14 sm:py-16 border-t border-white/[0.06]">
+		<section className="landing-section-dark py-14 sm:py-16 border-t border-volt-border">
 			<div className="max-w-6xl mx-auto px-4">
-				<p className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500 text-center mb-10">
+				<p className="font-mono text-xs uppercase tracking-[0.28em] text-volt-steel text-center mb-10">
 					Trusted in production
 				</p>
 				<div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16">
 					<div className="flex items-center gap-4">
-						<div className="h-12 w-32 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center">
-							<span className="landing-heading text-lg text-white tracking-tight">
+						<div className="h-12 w-32 rounded-lg bg-volt-carbon border border-volt-border flex items-center justify-center shadow-[0_0_15px_rgba(92,88,85,0.2)]">
+							<span className="text-lg text-volt-snow tracking-tight font-medium">
 								Deriv
 							</span>
 						</div>
-						<p className="text-sm text-zinc-500 max-w-xs">
+						<p className="text-sm text-volt-parchment max-w-xs tracking-wide">
 							Engineering Lead, Applied AI — shipping systems used at scale.
 						</p>
 					</div>
 					<div className="flex gap-4">
-						<div className="w-28 h-20 rounded-xl bg-gradient-to-br from-violet-500/20 to-cyan-500/10 border border-white/10 flex items-center justify-center">
-							<span className="font-mono text-[10px] text-zinc-400 text-center px-2">
+						<div className="w-28 h-20 rounded-lg bg-volt-carbon border border-dashed border-[rgba(79,93,117,0.4)] flex items-center justify-center">
+							<span className="font-mono text-[10px] text-volt-steel text-center px-2">
 								Dubai
 								<br />
 								workshop
 							</span>
 						</div>
-						<div className="w-28 h-20 rounded-xl bg-gradient-to-br from-fuchsia-500/15 to-violet-500/10 border border-white/10 flex items-center justify-center">
-							<span className="font-mono text-[10px] text-zinc-400 text-center px-2">
+						<div className="w-28 h-20 rounded-lg bg-volt-carbon border border-dashed border-[rgba(79,93,117,0.4)] flex items-center justify-center">
+							<span className="font-mono text-[10px] text-volt-steel text-center px-2">
 								Jordan
 								<br />
 								session

@@ -6,12 +6,12 @@ interface PipelineBoardProps {
 }
 
 const STAGES = [
-	{ key: "lead", label: "Lead", color: "border-blue-400" },
-	{ key: "qualified", label: "Qualified", color: "border-yellow-400" },
-	{ key: "proposal", label: "Proposal", color: "border-purple-400" },
-	{ key: "negotiation", label: "Negotiation", color: "border-orange-400" },
-	{ key: "won", label: "Won", color: "border-green-500" },
-	{ key: "lost", label: "Lost", color: "border-red-400" },
+	{ key: "lead", label: "Lead", color: "border-t-volt-steel" },
+	{ key: "qualified", label: "Qualified", color: "border-t-volt-purple" },
+	{ key: "proposal", label: "Proposal", color: "border-t-volt-mint" },
+	{ key: "negotiation", label: "Negotiation", color: "border-t-volt-green" },
+	{ key: "won", label: "Won", color: "border-t-emerald-400" },
+	{ key: "lost", label: "Lost", color: "border-t-red-500" },
 ];
 
 export function PipelineBoard({ pipeline }: PipelineBoardProps) {
@@ -22,13 +22,13 @@ export function PipelineBoard({ pipeline }: PipelineBoardProps) {
 				return (
 					<div
 						key={key}
-						className={`min-w-[240px] flex-shrink-0 border-t-4 ${color} bg-comic-gray-light/30 rounded-lg`}
+						className={`min-w-[240px] shrink-0 rounded-lg bg-volt-carbon border border-volt-border border-t-4 ${color}`}
 					>
 						<div className="p-3 flex items-center justify-between">
-							<h3 className="font-display font-bold text-sm text-comic-black uppercase">
+							<h3 className="font-display font-bold text-sm text-volt-snow uppercase">
 								{label}
 							</h3>
-							<span className="font-mono text-xs text-comic-gray-medium bg-comic-white px-2 py-0.5 rounded-full border border-comic-gray-light">
+							<span className="font-mono text-xs text-volt-steel bg-volt-carbon px-2 py-0.5 rounded-full border border-volt-border">
 								{items.length}
 							</span>
 						</div>
@@ -41,7 +41,7 @@ export function PipelineBoard({ pipeline }: PipelineBoardProps) {
 								/>
 							))}
 							{items.length === 0 && (
-								<p className="font-mono text-xs text-comic-gray-medium text-center py-6">
+								<p className="font-mono text-xs text-volt-steel text-center py-6">
 									No deals
 								</p>
 							)}
