@@ -5,7 +5,15 @@ import { renderToReadableStream } from "react-dom/server";
 
 export function handleError(error: unknown, { request }: { request: Request }) {
 	if (!request.signal?.aborted) {
-		console.error("[tokenoverflow] Server error:", error);
+		if (error instanceof Response) {
+			console.error(
+				"[tokenoverflow] Server error:",
+				error.status,
+				error.statusText || "",
+			);
+		} else {
+			console.error("[tokenoverflow] Server error:", error);
+		}
 	}
 }
 
