@@ -79,60 +79,60 @@ export default function AdminCRMContactDetail({
 		<div className="max-w-3xl mx-auto px-4 py-12">
 			<Link
 				to="/admin/crm"
-				className="font-display font-bold text-sm text-comic-gray-medium hover:text-comic-yellow transition inline-block mb-6"
+				className="font-display font-bold text-sm text-volt-steel hover:text-volt-green transition inline-block mb-6"
 			>
 				← CRM
 			</Link>
 
 			{/* Contact Header */}
 			<div className="comic-card p-6 mb-6">
-				<h1 className="comic-heading text-2xl text-comic-black">
+				<h1 className="comic-heading text-2xl text-volt-snow">
 					{contact.firstName} {contact.lastName ?? ""}
 				</h1>
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
 					<p className="font-mono text-sm">
-						<span className="text-comic-gray-medium">Email: </span>
+						<span className="text-volt-steel">Email: </span>
 						<a
 							href={`mailto:${contact.email}`}
-							className="text-comic-black hover:text-comic-yellow transition"
+							className="text-volt-snow hover:text-volt-green transition"
 						>
 							{contact.email}
 						</a>
 					</p>
 					{contact.company && (
 						<p className="font-mono text-sm">
-							<span className="text-comic-gray-medium">Company: </span>
-							<span className="text-comic-black">{contact.company}</span>
+							<span className="text-volt-steel">Company: </span>
+							<span className="text-volt-snow">{contact.company}</span>
 						</p>
 					)}
 					{contact.role && (
 						<p className="font-mono text-sm">
-							<span className="text-comic-gray-medium">Role: </span>
-							<span className="text-comic-black">{contact.role}</span>
+							<span className="text-volt-steel">Role: </span>
+							<span className="text-volt-snow">{contact.role}</span>
 						</p>
 					)}
 					{contact.phone && (
 						<p className="font-mono text-sm">
-							<span className="text-comic-gray-medium">Phone: </span>
-							<span className="text-comic-black">{contact.phone}</span>
+							<span className="text-volt-steel">Phone: </span>
+							<span className="text-volt-snow">{contact.phone}</span>
 						</p>
 					)}
 					{contact.linkedin && (
 						<p className="font-mono text-sm">
-							<span className="text-comic-gray-medium">LinkedIn: </span>
+							<span className="text-volt-steel">LinkedIn: </span>
 							<a
 								href={contact.linkedin}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="text-comic-black hover:text-comic-yellow transition"
+								className="text-volt-snow hover:text-volt-green transition"
 							>
 								Profile
 							</a>
 						</p>
 					)}
 					<p className="font-mono text-sm">
-						<span className="text-comic-gray-medium">Source: </span>
-						<span className="text-comic-black">{contact.source}</span>
+						<span className="text-volt-steel">Source: </span>
+						<span className="text-volt-snow">{contact.source}</span>
 					</p>
 				</div>
 				{tags.length > 0 && (
@@ -140,14 +140,14 @@ export default function AdminCRMContactDetail({
 						{tags.map((tag) => (
 							<span
 								key={tag}
-								className="font-mono text-xs bg-comic-gray-light text-comic-gray-medium px-2 py-0.5 rounded"
+								className="font-mono text-xs bg-volt-carbon-light text-volt-steel px-2 py-0.5 rounded"
 							>
 								{tag}
 							</span>
 						))}
 					</div>
 				)}
-				<p className="font-mono text-xs text-comic-gray-medium mt-3">
+				<p className="font-mono text-xs text-volt-steel mt-3">
 					Contact since{" "}
 					{new Date(contact.createdAt).toLocaleDateString()}
 				</p>
@@ -155,7 +155,7 @@ export default function AdminCRMContactDetail({
 
 			{/* Deals */}
 			<section className="mb-8">
-				<h2 className="font-display font-bold text-lg text-comic-black mb-3">
+				<h2 className="font-display font-bold text-lg text-volt-snow mb-3">
 					DEALS
 				</h2>
 				{contact.deals.length > 0 ? (
@@ -166,11 +166,11 @@ export default function AdminCRMContactDetail({
 								className="comic-card p-4 flex flex-wrap items-center justify-between gap-2"
 							>
 								<div>
-									<span className="font-display font-bold text-comic-black">
+									<span className="font-display font-bold text-volt-snow">
 										{deal.title}
 									</span>
 									{deal.value != null && (
-										<span className="font-mono text-sm text-comic-gray-medium ml-2">
+										<span className="font-mono text-sm text-volt-steel ml-2">
 											{new Intl.NumberFormat("en-US", {
 												style: "currency",
 												currency: deal.currency ?? "USD",
@@ -188,7 +188,7 @@ export default function AdminCRMContactDetail({
 						))}
 					</div>
 				) : (
-					<p className="font-mono text-xs text-comic-gray-medium">
+					<p className="font-mono text-xs text-volt-steel">
 						No deals yet.
 					</p>
 				)}
@@ -196,7 +196,7 @@ export default function AdminCRMContactDetail({
 
 			{/* Add Note */}
 			<section className="mb-8">
-				<h2 className="font-display font-bold text-lg text-comic-black mb-3">
+				<h2 className="font-display font-bold text-lg text-volt-snow mb-3">
 					ADD NOTE
 				</h2>
 				<form onSubmit={submitNote} className="comic-card p-4 space-y-3">
@@ -205,7 +205,7 @@ export default function AdminCRMContactDetail({
 						value={noteTitle}
 						onChange={(e) => setNoteTitle(e.target.value)}
 						placeholder="Note title..."
-						className="w-full border-2 border-comic-black rounded px-3 py-2 font-mono text-sm focus:outline-none focus:border-comic-yellow"
+						className="w-full border-2 border-volt-border rounded px-3 py-2 font-mono text-sm focus:outline-none focus:border-volt-green"
 						required
 					/>
 					<textarea
@@ -213,7 +213,7 @@ export default function AdminCRMContactDetail({
 						onChange={(e) => setNoteBody(e.target.value)}
 						placeholder="Details (optional)..."
 						rows={3}
-						className="w-full border-2 border-comic-black rounded px-3 py-2 font-mono text-sm focus:outline-none focus:border-comic-yellow resize-y"
+						className="w-full border-2 border-volt-border rounded px-3 py-2 font-mono text-sm focus:outline-none focus:border-volt-green resize-y"
 					/>
 					<button
 						type="submit"
@@ -227,7 +227,7 @@ export default function AdminCRMContactDetail({
 
 			{/* Activity Feed */}
 			<section>
-				<h2 className="font-display font-bold text-lg text-comic-black mb-3">
+				<h2 className="font-display font-bold text-lg text-volt-snow mb-3">
 					ACTIVITY
 				</h2>
 				<ActivityFeed activities={contact.activities} />

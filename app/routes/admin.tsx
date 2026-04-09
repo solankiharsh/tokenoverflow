@@ -25,11 +25,11 @@ export default function Admin({ loaderData }: Route.ComponentProps) {
 
 	return (
 		<div className="max-w-3xl mx-auto px-4 py-12">
-			<pre className="font-mono text-xs text-comic-gray-medium mb-2">
+			<pre className="font-mono text-xs text-volt-steel mb-2">
 				~/$ admin
 			</pre>
-			<h1 className="comic-heading text-2xl text-comic-black mb-2">ADMIN</h1>
-			<p className="text-sm text-comic-gray-medium mb-6">
+			<h1 className="comic-heading text-2xl text-volt-snow mb-2">ADMIN</h1>
+			<p className="text-sm text-volt-steel mb-6">
 				Manage blog posts. Drafts are hidden from the public blog.
 			</p>
 			<Link
@@ -45,13 +45,13 @@ export default function Admin({ loaderData }: Route.ComponentProps) {
 						className="comic-card p-4 flex flex-wrap items-center justify-between gap-2"
 					>
 						<div>
-							<span className="font-mono text-xs text-comic-gray-medium mr-2">
+							<span className="font-mono text-xs text-volt-steel mr-2">
 								[{post.status}]
 							</span>
-							<span className="font-display font-bold text-comic-black">
+							<span className="font-display font-bold text-volt-snow">
 								{post.title}
 							</span>
-							<span className="text-comic-gray-medium text-sm ml-2">
+							<span className="text-volt-steel text-sm ml-2">
 								{post.date}
 							</span>
 						</div>
@@ -81,7 +81,7 @@ export default function Admin({ loaderData }: Route.ComponentProps) {
 				))}
 			</ul>
 			{posts.length === 0 && (
-				<p className="text-comic-gray-medium text-sm">
+				<p className="text-volt-steel text-sm">
 					No posts yet. Create one above.
 				</p>
 			)}

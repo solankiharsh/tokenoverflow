@@ -15,13 +15,13 @@ export function meta({}: Route.MetaArgs) {
 export default function Projects() {
 	return (
 		<div className="max-w-4xl mx-auto px-4 py-12">
-			<pre className="font-mono text-xs text-comic-gray-medium mb-2">
+			<pre className="font-mono text-xs text-volt-steel mb-2">
 				~/$ ls projects/
 			</pre>
-			<h1 className="comic-heading text-3xl sm:text-4xl text-comic-black mb-2">
+			<h1 className="comic-heading text-3xl sm:text-4xl text-volt-snow mb-2">
 				PROJECTS
 			</h1>
-			<p className="text-comic-gray-medium mb-8">
+			<p className="text-volt-steel mb-8">
 				Stuff I built when not shipping AI at work.
 			</p>
 			<div className="grid gap-6 sm:grid-cols-2">

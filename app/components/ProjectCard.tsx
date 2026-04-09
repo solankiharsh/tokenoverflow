@@ -10,17 +10,17 @@ const isInternal = (href: string) => href.startsWith("/");
 export function ProjectCard({ project }: ProjectCardProps) {
 	return (
 		<article className="comic-card-hover p-5 flex flex-col">
-			<h3 className="comic-heading text-xl text-comic-black mb-1">
+			<h3 className="comic-heading text-xl text-volt-snow mb-1">
 				{project.title}
 			</h3>
-			<p className="text-sm text-comic-gray-medium mb-3">
+			<p className="text-sm text-volt-steel mb-3">
 				{project.description}
 			</p>
 			<div className="flex flex-wrap gap-2 mb-4">
 				{project.tech.map((t) => (
 					<span
 						key={t}
-						className="font-mono text-xs px-2 py-1 border-2 border-comic-black bg-comic-gray text-comic-gray-dark font-medium"
+						className="font-mono text-xs px-2 py-1 border-2 border-volt-border bg-volt-carbon text-volt-parchment font-medium"
 					>
 						{t}
 					</span>

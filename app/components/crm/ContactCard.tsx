@@ -6,12 +6,12 @@ interface ContactCardProps {
 }
 
 const SOURCE_COLORS: Record<string, string> = {
-	website: "bg-blue-100 text-blue-800",
-	newsletter: "bg-green-100 text-green-800",
-	referral: "bg-purple-100 text-purple-800",
-	linkedin: "bg-sky-100 text-sky-800",
-	event: "bg-orange-100 text-orange-800",
-	manual: "bg-gray-100 text-gray-800",
+	website: "bg-volt-carbon border border-volt-border text-volt-mint",
+	newsletter: "bg-volt-carbon border border-volt-green/30 text-volt-green",
+	referral: "bg-volt-carbon border border-volt-purple/40 text-volt-purple",
+	linkedin: "bg-volt-carbon border border-volt-border text-volt-mist",
+	event: "bg-volt-carbon border border-volt-border text-volt-parchment",
+	manual: "bg-volt-carbon border border-volt-border text-volt-steel",
 };
 
 export function ContactCard({ contact }: ContactCardProps) {
@@ -30,14 +30,14 @@ export function ContactCard({ contact }: ContactCardProps) {
 		>
 			<div className="flex items-start justify-between gap-2">
 				<div className="min-w-0">
-					<p className="font-display font-bold text-comic-black truncate">
+					<p className="font-display font-bold text-volt-snow truncate">
 						{contact.firstName} {contact.lastName ?? ""}
 					</p>
-					<p className="font-mono text-xs text-comic-gray-medium truncate">
+					<p className="font-mono text-xs text-volt-steel truncate">
 						{contact.email}
 					</p>
 					{contact.company && (
-						<p className="text-sm text-comic-gray-medium mt-0.5">
+						<p className="text-sm text-volt-steel mt-0.5">
 							{contact.company}
 							{contact.role ? ` — ${contact.role}` : ""}
 						</p>
@@ -54,7 +54,7 @@ export function ContactCard({ contact }: ContactCardProps) {
 					{tags.map((tag) => (
 						<span
 							key={tag}
-							className="font-mono text-xs bg-comic-gray-light text-comic-gray-medium px-1.5 py-0.5 rounded"
+							className="font-mono text-xs border border-volt-border bg-volt-abyss text-volt-parchment px-1.5 py-0.5 rounded-md"
 						>
 							{tag}
 						</span>

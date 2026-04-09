@@ -42,11 +42,11 @@ export default function AdminCRM({ loaderData }: Route.ComponentProps) {
 				<div>
 					<Link
 						to="/admin"
-						className="font-display font-bold text-sm text-comic-gray-medium hover:text-comic-yellow transition inline-block mb-2"
+						className="font-display font-bold text-sm text-volt-steel hover:text-volt-green transition inline-block mb-2"
 					>
 						← ADMIN
 					</Link>
-					<h1 className="comic-heading text-2xl text-comic-black">CRM</h1>
+					<h1 className="comic-heading text-2xl text-volt-snow">CRM</h1>
 				</div>
 				<div className="flex gap-2">
 					<Link
@@ -67,7 +67,7 @@ export default function AdminCRM({ loaderData }: Route.ComponentProps) {
 			<div className="grid md:grid-cols-2 gap-8 mt-8">
 				{/* Recent Contacts */}
 				<section>
-					<h2 className="font-display font-bold text-lg text-comic-black mb-3">
+					<h2 className="font-display font-bold text-lg text-volt-snow mb-3">
 						RECENT CONTACTS
 					</h2>
 					<div className="space-y-2">
@@ -75,7 +75,7 @@ export default function AdminCRM({ loaderData }: Route.ComponentProps) {
 							<ContactCard key={contact.id} contact={contact} />
 						))}
 						{recentContacts.length === 0 && (
-							<p className="font-mono text-xs text-comic-gray-medium">
+							<p className="font-mono text-xs text-volt-steel">
 								No contacts yet.
 							</p>
 						)}
@@ -84,45 +84,45 @@ export default function AdminCRM({ loaderData }: Route.ComponentProps) {
 
 				{/* Recent Submissions */}
 				<section>
-					<h2 className="font-display font-bold text-lg text-comic-black mb-3">
+					<h2 className="font-display font-bold text-lg text-volt-snow mb-3">
 						FORM SUBMISSIONS
 					</h2>
 					<div className="space-y-2">
 						{recentSubmissions.map((sub) => (
 							<div key={sub.id} className="comic-card p-3">
 								<div className="flex items-center justify-between gap-2">
-									<span className="font-display font-bold text-sm text-comic-black">
+									<span className="font-display font-bold text-sm text-volt-snow">
 										{sub.name || sub.email}
 									</span>
 									<span
-										className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+										className={`text-xs font-semibold px-2 py-0.5 rounded-md border ${
 											sub.status === "new"
-												? "bg-blue-100 text-blue-800"
+												? "border-volt-mint/50 text-volt-mint bg-volt-carbon"
 												: sub.status === "contacted"
-													? "bg-yellow-100 text-yellow-800"
+													? "border-amber-500/40 text-amber-400 bg-volt-carbon"
 													: sub.status === "converted"
-														? "bg-green-100 text-green-800"
-														: "bg-gray-100 text-gray-800"
+														? "border-volt-green/50 text-volt-green bg-volt-carbon"
+														: "border-volt-border text-volt-steel bg-volt-carbon"
 										}`}
 									>
 										{sub.status.toUpperCase()}
 									</span>
 								</div>
-								<p className="font-mono text-xs text-comic-gray-medium">
+								<p className="font-mono text-xs text-volt-steel">
 									{sub.formType} — {sub.email}
 								</p>
 								{sub.message && (
-									<p className="text-sm text-comic-gray-medium mt-1 line-clamp-2">
+									<p className="text-sm text-volt-steel mt-1 line-clamp-2">
 										{sub.message}
 									</p>
 								)}
-								<p className="font-mono text-xs text-comic-gray-medium mt-1">
+								<p className="font-mono text-xs text-volt-steel mt-1">
 									{new Date(sub.createdAt).toLocaleDateString()}
 								</p>
 							</div>
 						))}
 						{recentSubmissions.length === 0 && (
-							<p className="font-mono text-xs text-comic-gray-medium">
+							<p className="font-mono text-xs text-volt-steel">
 								No submissions yet.
 							</p>
 						)}

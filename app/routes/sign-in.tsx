@@ -12,7 +12,7 @@ export function meta(_args: Route.MetaArgs) {
 export default function SignInPage() {
 	return (
 		<div className="min-h-[60vh] flex items-center justify-center px-4 py-12">
-			<div className="w-full max-w-md border-[3px] border-comic-black bg-comic-white p-4 shadow-[4px_4px_0_0_#000]">
+			<div className="w-full max-w-md border border-volt-border bg-volt-carbon p-4 shadow-[0_0_15px_rgba(92,88,85,0.2)]">
 				<SignIn
 					appearance={terminalAppearance}
 					routing="path"

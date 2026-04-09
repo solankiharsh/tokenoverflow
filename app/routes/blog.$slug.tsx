@@ -51,18 +51,18 @@ export default function BlogSlug({ loaderData }: Route.ComponentProps) {
 		<div className="max-w-3xl mx-auto px-4 py-12">
 			<Link
 				to="/blog"
-				className="font-display font-bold text-sm text-comic-gray-medium hover:text-comic-yellow transition mb-6 inline-block"
+				className="font-display font-bold text-sm text-volt-steel hover:text-volt-green transition mb-6 inline-block"
 			>
 				← BLOG
 			</Link>
 			<article>
-				<h1 className="comic-heading text-3xl text-comic-black mb-2">
+				<h1 className="comic-heading text-3xl text-volt-snow mb-2">
 					{post.title}
 				</h1>
-				<p className="text-sm text-comic-gray-medium mb-6 font-mono">
+				<p className="text-sm text-volt-steel mb-6 font-mono">
 					{post.date}
 				</p>
-				<div className="prose prose-sm max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:uppercase [&_a]:text-comic-black [&_a]:font-display [&_a]:font-bold [&_a]:underline hover:[&_a]:text-comic-yellow [&_pre]:bg-comic-gray [&_pre]:border-[3px] [&_pre]:border-comic-black [&_pre]:p-3 [&_code]:font-mono [&_code]:text-sm [&_code]:bg-comic-gray [&_code]:px-1">
+				<div className="prose prose-sm max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:uppercase [&_a]:text-volt-snow [&_a]:font-display [&_a]:font-bold [&_a]:underline hover:[&_a]:text-volt-green [&_pre]:bg-volt-carbon [&_pre]:border [&_pre]:border-volt-border [&_pre]:p-3 [&_code]:font-mono [&_code]:text-sm [&_code]:bg-volt-carbon [&_code]:px-1">
 					<ReactMarkdown>{post.content}</ReactMarkdown>
 				</div>
 			</article>
@@ -75,12 +75,12 @@ export function ErrorBoundary() {
 	if (error && typeof error === "object" && "status" in error && error.status === 404) {
 		return (
 			<div className="max-w-3xl mx-auto px-4 py-12 text-center">
-				<h1 className="comic-heading text-2xl text-comic-black mb-4">
+				<h1 className="comic-heading text-2xl text-volt-snow mb-4">
 					404 — post not found
 				</h1>
 				<Link
 					to="/blog"
-					className="font-display font-bold text-comic-black hover:text-comic-yellow transition"
+					className="font-display font-bold text-volt-snow hover:text-volt-green transition"
 				>
 					← BACK TO BLOG
 				</Link>

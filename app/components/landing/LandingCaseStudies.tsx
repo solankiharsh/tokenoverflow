@@ -21,32 +21,32 @@ const CASES = [
 
 export function LandingCaseStudies() {
 	return (
-		<section className="landing-section-muted py-20 sm:py-28 border-t border-white/[0.06]">
+		<section className="landing-section-muted py-20 sm:py-28 border-t border-volt-border">
 			<div className="max-w-6xl mx-auto px-4">
-				<p className="font-mono text-xs uppercase tracking-[0.2em] text-fuchsia-400/90 mb-3">
+				<p className="font-mono text-xs uppercase tracking-[0.28em] text-volt-purple mb-3">
 					Selected work
 				</p>
-				<h2 className="landing-heading text-3xl sm:text-4xl text-white mb-12">
+				<h2 className="landing-heading text-3xl sm:text-4xl text-volt-snow mb-12">
 					Featured case studies
 				</h2>
 				<div className="grid md:grid-cols-3 gap-4 md:gap-5">
 					{CASES.map((c) => (
 						<SpotlightCard key={c.name} className="p-6 flex flex-col">
-							<span className="font-mono text-[10px] uppercase tracking-wider text-violet-300/80 mb-3">
+							<span className="font-mono text-[10px] uppercase tracking-wider text-volt-mint mb-3">
 								{c.highlight}
 							</span>
-							<h3 className="landing-heading text-lg text-white mb-2">
+							<h3 className="landing-heading text-lg text-volt-snow mb-2">
 								{c.name}
 							</h3>
-							<p className="text-sm text-zinc-400 leading-relaxed flex-1 relative z-10">
+							<p className="text-sm text-volt-parchment leading-relaxed flex-1 relative z-10 tracking-wide">
 								{c.blurb}
 							</p>
 						</SpotlightCard>
 					))}
 				</div>
-				<p className="mt-8 text-sm text-zinc-500">
+				<p className="mt-8 text-sm text-volt-steel tracking-wide">
 					Detailed write-ups live under{" "}
-					<Link to="/projects" className="text-cyan-400 hover:underline">
+					<Link to="/projects" className="text-volt-mint hover:text-volt-green transition-colors">
 						Projects
 					</Link>{" "}
 					as they ship publicly.

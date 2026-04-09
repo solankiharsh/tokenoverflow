@@ -46,14 +46,9 @@ export const links: Route.LinksFunction = () => [
 		href: "https://fonts.gstatic.com",
 		crossOrigin: "anonymous",
 	},
-	{ rel: "preconnect", href: "https://api.fontshare.com" },
 	{
 		rel: "stylesheet",
-		href: "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap",
-	},
-	{
-		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=Bangers&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap",
+		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
 	},
 ];
 
@@ -66,7 +61,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body className="flex flex-col min-h-screen font-sans bg-comic-white text-comic-black">
+			<body className="flex flex-col min-h-screen font-sans antialiased bg-volt-abyss text-volt-snow">
 				{children}
 				<ScrollRestoration />
 				<Scripts />
@@ -114,11 +109,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 	}
 
 	return (
-		<main className="max-w-3xl mx-auto px-4 py-16">
-			<h1 className="comic-heading text-2xl text-comic-black">{message}</h1>
-			<p className="text-sm text-comic-gray-medium mt-2">{details}</p>
+		<main className="max-w-3xl mx-auto px-4 py-16 volt-page">
+			<h1 className="comic-heading text-2xl">{message}</h1>
+			<p className="text-sm text-volt-steel mt-2">{details}</p>
 			{stack && (
-				<pre className="w-full p-4 mt-4 overflow-x-auto text-xs font-mono border-[3px] border-comic-black bg-comic-gray text-comic-black">
+				<pre className="w-full p-4 mt-4 overflow-x-auto text-xs font-mono rounded-lg border border-volt-border bg-volt-carbon text-volt-mint">
 					<code>{stack}</code>
 				</pre>
 			)}
