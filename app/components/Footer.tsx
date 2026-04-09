@@ -1,3 +1,4 @@
+import { useLocation } from "react-router";
 import { SubscribeForm } from "./SubscribeForm";
 
 const socials = [
@@ -11,6 +12,45 @@ const socials = [
 ];
 
 export function Footer() {
+	const location = useLocation();
+	const isLanding = location.pathname === "/";
+
+	if (isLanding) {
+		return (
+			<footer className="border-t border-white/10 bg-[#050508] text-zinc-300 mt-auto">
+				<div className="max-w-6xl mx-auto px-4 py-12">
+					<section id="subscribe" className="mb-10">
+						<h2 className="landing-heading text-lg text-white mb-2">
+							Subscribe
+						</h2>
+						<p className="text-zinc-500 text-sm mb-3 font-mono">
+							Occasional AI/ML notes — no spam.
+						</p>
+						<div className="max-w-md">
+							<SubscribeForm variant="dark" />
+						</div>
+					</section>
+					<div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+						{socials.map(({ href, label }) => (
+							<a
+								key={href}
+								href={href}
+								target="_blank"
+								rel="noreferrer"
+								className="font-heading font-semibold text-zinc-400 hover:text-white transition"
+							>
+								{label}
+							</a>
+						))}
+					</div>
+					<p className="mt-6 text-xs text-zinc-600 font-mono">
+						React Router · Cloudflare Workers · D1
+					</p>
+				</div>
+			</footer>
+		);
+	}
+
 	return (
 		<footer className="border-t-[3px] border-comic-black bg-comic-white mt-auto">
 			<div className="max-w-4xl mx-auto px-4 py-8">

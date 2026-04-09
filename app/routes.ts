@@ -15,4 +15,24 @@ export default [
 	route("api/admin/posts/:id", "routes/api.admin.posts.$id.tsx"),
 	route("sign-in/*", "routes/sign-in.tsx"),
 	route("sign-up/*", "routes/sign-up.tsx"),
+
+	// CRM — public
+	route("api/crm/submit", "routes/api.crm.submit.tsx"),
+
+	// CRM — admin UI
+	route("admin/crm", "routes/admin.crm.tsx"),
+	route("admin/crm/contacts/:id", "routes/admin.crm.contacts.$id.tsx"),
+	route("admin/crm/pipeline", "routes/admin.crm.pipeline.tsx"),
+
+	// CRM — admin API
+	route("api/admin/crm/contacts", "routes/api.admin.crm.contacts.tsx"),
+	route("api/admin/crm/contacts/:id", "routes/api.admin.crm.contacts.$id.tsx"),
+	route("api/admin/crm/deals", "routes/api.admin.crm.deals.tsx"),
+	route(
+		"api/admin/crm/deals/:id/stage",
+		"routes/api.admin.crm.deals.$id.stage.tsx",
+	),
+	route("api/admin/crm/activities", "routes/api.admin.crm.activities.tsx"),
+	route("api/admin/crm/stats", "routes/api.admin.crm.stats.tsx"),
+	route("api/admin/crm/submissions", "routes/api.admin.crm.submissions.tsx"),
 ] satisfies RouteConfig;
