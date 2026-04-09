@@ -31,6 +31,20 @@ export async function getPosts(d1: AnyD1Database): Promise<BlogPost[]> {
 	return rows.map(rowToBlogPost);
 }
 
+export async function getRecentPosts(
+	d1: AnyD1Database,
+	limit: number,
+): Promise<BlogPost[]> {
+	const db = getDb(d1);
+	const rows = await db
+		.select()
+		.from(posts)
+		.where(eq(posts.status, "published"))
+		.orderBy(desc(posts.createdAt))
+		.limit(limit);
+	return rows.map(rowToBlogPost);
+}
+
 export async function getPost(
 	d1: AnyD1Database,
 	slug: string,

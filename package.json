@@ -43,8 +43,10 @@
 		"check": "tsc && react-router build && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
 		"dev": "react-router dev",
-		"db:migrate:local": "wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0001_create_posts.sql && wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0002_seed_posts.sql && wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0003_remove_rag_post.sql",
-		"db:migrate:remote": "wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0001_create_posts.sql && wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0002_seed_posts.sql && wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0003_remove_rag_post.sql",
+		"db:migrate:local": "wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0001_create_posts.sql && wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0002_seed_posts.sql && wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0003_remove_rag_post.sql && wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0004_create_crm_tables.sql",
+		"db:migrate:remote": "wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0001_create_posts.sql && wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0002_seed_posts.sql && wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0003_remove_rag_post.sql && wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0004_create_crm_tables.sql",
+		"db:crm:local": "wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0004_create_crm_tables.sql",
+		"db:crm:remote": "wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0004_create_crm_tables.sql",
 		"preview": "npm run build && vite preview",
 		"typecheck": "npm run typegen && tsc -b"
 	},

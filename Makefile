@@ -1,7 +1,7 @@
 # tokenoverflow — portfolio (React Router + Cloudflare Workers)
 # Usage: make [target]
 
-.PHONY: install dev build deploy preview typecheck clean kill-ports db-create db-migrate db-migrate-local db-seed db-seed-local db-setup-local update-d1-uuid help
+.PHONY: install dev run build deploy preview typecheck clean kill-ports db-create db-migrate db-migrate-local db-seed db-seed-local db-setup-local db-setup-remote db-crm-local db-crm-remote update-d1-uuid help
 
 # Default dev server port (react-router dev)
 PORT ?= 5173
@@ -11,18 +11,26 @@ help:
 	@echo ""
 	@echo "  make install   Install dependencies"
 	@echo "  make dev       Run dev server (default port $(PORT))"
+	@echo "  make run       Same as make dev"
 	@echo "  make build     Production build"
 	@echo "  make deploy    Deploy to Cloudflare Workers"
-	@echo "  make preview  Build + preview production locally"
+	@echo "  make preview   Build + preview production locally"
 	@echo "  make typecheck Run TypeScript + React Router typegen"
 	@echo "  make clean     Remove build output and node_modules"
 	@echo "  make kill-ports Kill processes on $(PORT) (if dev server won't start)"
+	@echo ""
+	@echo "  First time locally:  make install && make db-setup-local && make dev"
+	@echo "  (Copy .dev.vars.example → .dev.vars and set Clerk keys.)"
+	@echo ""
 	@echo "  make db-create        Create D1 database (requires CLOUDFLARE_API_TOKEN)"
-	@echo "  make db-migrate       Apply migrations to D1 (remote)"
-	@echo "  make db-migrate-local Apply migrations to D1 (local dev — run once before npm run dev)"
-	@echo "  make db-seed          Seed posts (remote)"
-	@echo "  make db-seed-local    Seed posts (local dev; run db-migrate-local first)"
-	@echo "  make db-setup-local   Create table + seed local D1 (migrate then seed)"
+	@echo "  make db-migrate-local Apply ALL local D1 migrations (posts + CRM) — run before dev"
+	@echo "  make db-migrate       Apply ALL migrations to remote D1"
+	@echo "  make db-crm-local     Apply only CRM migration (0004) to local D1"
+	@echo "  make db-crm-remote    Apply only CRM migration (0004) to remote D1"
+	@echo "  make db-seed          Seed posts only (remote; 0002)"
+	@echo "  make db-seed-local    Seed posts only (local; 0002)"
+	@echo "  make db-setup-local   Full local schema: 0001–0004 (posts + CRM)"
+	@echo "  make db-setup-remote  Full remote schema: 0001–0004"
 	@echo "  make update-d1-uuid   Fetch D1 UUID via API (uses .env.local) and update wrangler.json"
 	@echo ""
 
@@ -31,6 +39,8 @@ install:
 
 dev:
 	npm run dev
+
+run: dev
 
 build:
 	npm run build
@@ -57,11 +67,19 @@ DB_NAME ?= tokenoverflow-blog
 db-create:
 	npx wrangler d1 create $(DB_NAME)
 
+# Apply all migrations in order (matches npm run db:migrate:remote)
 db-migrate:
 	npx wrangler d1 execute $(DB_NAME) --remote --file=./migrations/0001_create_posts.sql
+	npx wrangler d1 execute $(DB_NAME) --remote --file=./migrations/0002_seed_posts.sql
+	npx wrangler d1 execute $(DB_NAME) --remote --file=./migrations/0003_remove_rag_post.sql
+	npx wrangler d1 execute $(DB_NAME) --remote --file=./migrations/0004_create_crm_tables.sql
 
+# Apply all migrations in order (matches npm run db:migrate:local)
 db-migrate-local:
 	npx wrangler d1 execute $(DB_NAME) --local --file=./migrations/0001_create_posts.sql
+	npx wrangler d1 execute $(DB_NAME) --local --file=./migrations/0002_seed_posts.sql
+	npx wrangler d1 execute $(DB_NAME) --local --file=./migrations/0003_remove_rag_post.sql
+	npx wrangler d1 execute $(DB_NAME) --local --file=./migrations/0004_create_crm_tables.sql
 
 db-seed:
 	npx wrangler d1 execute $(DB_NAME) --remote --file=./migrations/0002_seed_posts.sql
@@ -69,13 +87,17 @@ db-seed:
 db-seed-local:
 	npx wrangler d1 execute $(DB_NAME) --local --file=./migrations/0002_seed_posts.sql
 
-# First-time local setup: create posts table then seed (run once before npm run dev)
-db-setup-local:
-	$(MAKE) db-migrate-local
-	$(MAKE) db-seed-local
+db-crm-local:
+	npx wrangler d1 execute $(DB_NAME) --local --file=./migrations/0004_create_crm_tables.sql
 
-# First-time remote setup: apply schema + seed to production D1 (requires CLOUDFLARE_API_TOKEN)
-db-setup-remote: db-migrate db-seed
+db-crm-remote:
+	npx wrangler d1 execute $(DB_NAME) --remote --file=./migrations/0004_create_crm_tables.sql
+
+# First-time local setup: full schema + seed + CRM (run once before make dev)
+db-setup-local: db-migrate-local
+
+# First-time remote setup: full schema to production D1 (requires CLOUDFLARE_API_TOKEN)
+db-setup-remote: db-migrate
 
 # Fetch D1 database UUID via Cloudflare API and set d1_databases[0].database_id in wrangler.json.
 # Reads CLOUDFLARE_API_TOKEN (and optional CLOUDFLARE_ACCOUNT_ID) from .env.local.
