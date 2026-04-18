@@ -5,3 +5,8 @@ CLERK_SECRET_KEY=sk_test_...
 
 # Optional: Cal.com, Calendly, or n8n booking page — home page "Book a call" CTA
 # VITE_BOOKING_URL=https://cal.com/your-handle/strategy
+
+# ASCII route (/ascii) — server-side Gemini proxy at /api/ascii/analyze
+# Get a key at https://aistudio.google.com/app/apikey
+# For production: `wrangler secret put GEMINI_API_KEY`
+GEMINI_API_KEY=
