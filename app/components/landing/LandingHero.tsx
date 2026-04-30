@@ -26,14 +26,15 @@ export function LandingHero() {
 				</p>
 				<h1 className="landing-animate-in landing-animate-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] text-volt-snow mb-6 leading-[1.05] tracking-[-0.04em] font-normal">
 					I architect{" "}
-					<span className="landing-glow-text">production AI systems</span> that
-					ship — from multi-agent pipelines to algorithmic trading engines.
+					<span className="landing-glow-text">production AI systems</span> —
+					agents, trading engines, MLOps.
 				</h1>
 				<p className="landing-animate-in landing-animate-delay-2 text-lg sm:text-xl text-volt-parchment max-w-2xl leading-relaxed mb-10 tracking-wide">
-					Engineering Lead, Applied AI at Deriv. Four years before that inside
-					Target's ML Platform — feature store, Kernels-as-a-Service notebooks,
-					MLflow. Fractional CTO / technical sparring partner for teams that
-					need rigor, not slide decks.
+					Engineering Lead, Applied AI at Deriv. From multi-agent pipelines
+					to algorithmic trading engines — four years before that inside
+					Target's ML Platform (feature store, Kernels-as-a-Service, MLflow).
+					Fractional CTO / technical sparring partner for teams that need
+					rigor, not slide decks.
 				</p>
 				<div className="landing-animate-in landing-animate-delay-3 flex flex-wrap gap-3">
 					<a

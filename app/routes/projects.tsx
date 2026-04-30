@@ -7,7 +7,7 @@ export function meta({ location }: Route.MetaArgs) {
 	return buildMeta({
 		title: "Projects — applied AI, NLP, and platform work",
 		description:
-			"Selected side projects from Harsh Solanki: AI agents, NLP tooling, FastAPI services, ML pipelines, and the system that powers this site.",
+			"Selected side projects by Harsh Solanki: AI agents, NLP tooling, FastAPI services, ML pipelines, and the infrastructure powering this site.",
 		path: location.pathname,
 		keywords: [
 			"Harsh Solanki projects",

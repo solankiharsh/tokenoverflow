@@ -21,16 +21,33 @@ export async function loader(args: Route.LoaderArgs) {
 	return { debug };
 }
 
+const FONTS_HREF =
+	"https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap";
+
 export const links: Route.LinksFunction = () => [
+	// DNS prefetch — polyfill for older proxies that don't honour preconnect
+	{ rel: "dns-prefetch", href: "https://fonts.googleapis.com" },
+	{ rel: "dns-prefetch", href: "https://fonts.gstatic.com" },
+	// Preconnect for the actual font CDN (avoids TLS negotiation cost)
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
 	{
 		rel: "preconnect",
 		href: "https://fonts.gstatic.com",
 		crossOrigin: "anonymous",
 	},
+	// Preload the font CSS so the browser discovers it early …
+	{
+		rel: "preload",
+		as: "style",
+		href: FONTS_HREF,
+	},
+	// … then load it non-render-blocking via media="print" + onload swap trick.
+	// The onload is handled by an inline <script> in Layout below to keep TSX clean.
 	{
 		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+		href: FONTS_HREF,
+		media: "print",
+		id: "google-fonts-sheet",
 	},
 	{ rel: "icon", href: "/favicon.ico", sizes: "any" },
 	{ rel: "apple-touch-icon", href: "/favicon.ico" },
@@ -63,6 +80,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<meta name="author" content="Harsh Solanki" />
 				<Meta />
 				<Links />
+				{/* Switch the font stylesheet from print → all once it finishes loading,
+				    making it non-render-blocking. noscript ensures fonts load without JS. */}
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: trusted inline performance snippet
+					dangerouslySetInnerHTML={{
+						__html: `(function(){var l=document.getElementById('google-fonts-sheet');if(l){l.onload=function(){l.media='all'};l.onerror=function(){l.media='all'}}})();`,
+					}}
+				/>
+				<noscript>
+					<link
+						rel="stylesheet"
+						href={FONTS_HREF}
+					/>
+				</noscript>
 			</head>
 			<body className="flex flex-col min-h-screen font-sans antialiased bg-volt-abyss text-volt-snow">
 				{children}

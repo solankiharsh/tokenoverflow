@@ -16,9 +16,9 @@ export const SITE = {
 	titleTemplate: "%s | Harsh Solanki",
 	defaultDescription:
 		"Engineering Lead, Applied AI at Deriv. I architect production AI systems — multi-agent pipelines, trading engines, MLOps — and write about it occasionally.",
-	defaultOgImage: "/harsh-solanki-ai-leadership-infographic.png",
+	defaultOgImage: "/og-default.png",
 	defaultOgImageAlt:
-		"Harsh Solanki — AI leadership and applied AI systems at Deriv.",
+		"Harsh Solanki — Production AI systems that ship. Engineering Lead, Applied AI.",
 	twitter: "@HarshSolan24317",
 	locale: "en_US",
 	person: {
@@ -56,6 +56,43 @@ export function absoluteUrl(maybeRelative: string): string {
 		? maybeRelative
 		: `/${maybeRelative}`;
 	return `${SITE.url}${path}`;
+}
+
+// ---------------------------------------------------------------------------
+// Title / description clamping helpers
+// ---------------------------------------------------------------------------
+
+/** Truncate `text` to at most `max` chars, breaking at the last word boundary. */
+function truncateAtWord(text: string, max: number): string {
+	if (text.length <= max) return text;
+	const sliced = text.slice(0, max);
+	const lastSpace = sliced.lastIndexOf(" ");
+	return (lastSpace > 0 ? sliced.slice(0, lastSpace) : sliced) + "…";
+}
+
+/**
+ * Ensure a page title fits 30–65 chars.
+ * - If the full title (which may already include " | Harsh Solanki") fits, keep it.
+ * - If it's too long, strip the site-name suffix first, then truncate at a word boundary.
+ */
+export function clampTitle(fullTitle: string): string {
+	const MAX = 65;
+	if (fullTitle.length <= MAX) return fullTitle;
+	// Try stripping the site-name suffix
+	const stripped = fullTitle.replace(/ \| Harsh Solanki$/, "");
+	if (stripped.length <= MAX) return stripped;
+	return truncateAtWord(stripped, MAX);
+}
+
+/**
+ * Ensure a meta description fits 70–160 chars.
+ * Long descriptions are truncated at a word boundary with an ellipsis.
+ * Short ones are returned as-is (forced padding would read unnaturally).
+ */
+export function clampDescription(text: string): string {
+	const MAX = 160;
+	if (text.length > MAX) return truncateAtWord(text, MAX);
+	return text;
 }
 
 type JsonLd = Record<string, unknown>;
@@ -107,11 +144,14 @@ export function buildMeta(input: BuildMetaInput): MetaDescriptor[] {
 		jsonLd,
 	} = input;
 
-	const resolvedTitle = fullTitle
+	const rawTitle = fullTitle
 		? fullTitle
 		: title
 			? SITE.titleTemplate.replace("%s", title)
 			: SITE.defaultTitle;
+
+	const resolvedTitle = clampTitle(rawTitle);
+	const resolvedDescription = clampDescription(description);
 
 	const url = canonicalUrl(path);
 	const ogImage = absoluteUrl(image ?? SITE.defaultOgImage);
@@ -119,7 +159,7 @@ export function buildMeta(input: BuildMetaInput): MetaDescriptor[] {
 
 	const tags: MetaDescriptor[] = [
 		{ title: resolvedTitle },
-		{ name: "description", content: description },
+		{ name: "description", content: resolvedDescription },
 		{ tagName: "link", rel: "canonical", href: url },
 
 		// Robots
@@ -135,19 +175,19 @@ export function buildMeta(input: BuildMetaInput): MetaDescriptor[] {
 		{ property: "og:site_name", content: SITE.name },
 		{ property: "og:locale", content: SITE.locale },
 		{ property: "og:title", content: resolvedTitle },
-		{ property: "og:description", content: description },
+		{ property: "og:description", content: resolvedDescription },
 		{ property: "og:url", content: url },
 		{ property: "og:image", content: ogImage },
 		{ property: "og:image:alt", content: ogImageAlt },
 		{ property: "og:image:width", content: "1200" },
-		{ property: "og:image:height", content: "675" },
+		{ property: "og:image:height", content: "630" },
 
 		// Twitter / X
 		{ name: "twitter:card", content: "summary_large_image" },
 		{ name: "twitter:site", content: SITE.twitter },
 		{ name: "twitter:creator", content: SITE.twitter },
 		{ name: "twitter:title", content: resolvedTitle },
-		{ name: "twitter:description", content: description },
+		{ name: "twitter:description", content: resolvedDescription },
 		{ name: "twitter:image", content: ogImage },
 		{ name: "twitter:image:alt", content: ogImageAlt },
 	];
@@ -182,7 +222,7 @@ export function buildMeta(input: BuildMetaInput): MetaDescriptor[] {
  */
 export function rootMeta(): MetaDescriptor[] {
 	const ogImage = absoluteUrl(SITE.defaultOgImage);
-	const desc = SITE.defaultDescription;
+	const desc = clampDescription(SITE.defaultDescription);
 
 	const tags: MetaDescriptor[] = [
 		{ title: SITE.defaultTitle },
@@ -201,7 +241,7 @@ export function rootMeta(): MetaDescriptor[] {
 		{ property: "og:image", content: ogImage },
 		{ property: "og:image:alt", content: SITE.defaultOgImageAlt },
 		{ property: "og:image:width", content: "1200" },
-		{ property: "og:image:height", content: "675" },
+		{ property: "og:image:height", content: "630" },
 
 		{ name: "twitter:card", content: "summary_large_image" },
 		{ name: "twitter:site", content: SITE.twitter },
