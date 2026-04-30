@@ -3,17 +3,20 @@ import { useState } from "react";
 import type { Route } from "./+types/admin.posts.new";
 import { requireAdmin } from "../lib/admin-auth";
 import { PostEditor, type PostEditorValues } from "../components/PostEditor";
+import { buildMeta } from "../lib/seo";
 
 export async function loader(args: Route.LoaderArgs) {
 	await requireAdmin(args);
 	return {};
 }
 
-export function meta(_args: Route.MetaArgs) {
-	return [
-		{ title: "New post | Admin | Harsh Solanki" },
-		{ name: "description", content: "Write a new blog post." },
-	];
+export function meta({ location }: Route.MetaArgs) {
+	return buildMeta({
+		title: "New post | Admin",
+		description: "Write a new blog post.",
+		path: location.pathname,
+		noindex: true,
+	});
 }
 
 const initial: PostEditorValues = {

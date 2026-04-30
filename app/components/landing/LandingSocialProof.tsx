@@ -16,6 +16,17 @@ export function LandingSocialProof() {
 							Engineering Lead, Applied AI — shipping systems used at scale.
 						</p>
 					</div>
+					<div className="flex items-center gap-4">
+						<div className="h-12 w-32 rounded-lg bg-volt-carbon border border-volt-border flex items-center justify-center shadow-[0_0_15px_rgba(92,88,85,0.2)]">
+							<span className="text-lg text-volt-snow tracking-tight font-medium">
+								Target
+							</span>
+						</div>
+						<p className="text-sm text-volt-parchment max-w-xs tracking-wide">
+							4 yrs on the in-house ML Platform — feature store, KaaS
+							notebooks, MLflow.
+						</p>
+					</div>
 					<div className="flex gap-4">
 						<div className="w-28 h-20 rounded-lg bg-volt-carbon border border-dashed border-[rgba(79,93,117,0.4)] flex items-center justify-center">
 							<span className="font-mono text-[10px] text-volt-steel text-center px-2">

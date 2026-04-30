@@ -7,6 +7,11 @@ export default [
 	route("blog", "routes/blog.tsx"),
 	route("blog/:slug", "routes/blog.$slug.tsx"),
 	route("cloak", "routes/cloak.tsx"),
+	// Hidden personal reference — intentionally not linked from the main nav.
+	route("wiki", "routes/wiki.tsx"),
+	// SEO resource routes
+	route("robots.txt", "routes/robots.ts"),
+	route("sitemap.xml", "routes/sitemap.ts"),
 	route("api/subscribe", "routes/api.subscribe.tsx"),
 	route("admin", "routes/admin.tsx"),
 	route("admin/posts/new", "routes/admin.posts.new.tsx"),

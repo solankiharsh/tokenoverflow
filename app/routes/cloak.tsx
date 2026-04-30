@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Route } from "./+types/cloak";
+import { buildMeta } from "../lib/seo";
 
 const env =
 	(typeof import.meta !== "undefined" ? import.meta.env : {}) as Record<string, string | undefined>;
@@ -14,15 +15,21 @@ const downloadUrl =
 	env.VITE_CLOAK_DMG_ARM64 ??
 	"https://ekjeqgyghkuqskiexvsg.supabase.co/storage/v1/object/public/cloak-releases/v0.1.9/dmg/Cloak_0.1.9_aarch64.dmg";
 
-export function meta({}: Route.MetaArgs) {
-	return [
-		{ title: "Cloak — Invisible AI Assistant" },
-		{
-			name: "description",
-			content:
-				"Your invisible AI assistant. Stealth in meetings, real-time transcription, call summaries. Tauri + Rust. Privacy-first, ~10MB. macOS.",
-		},
-	];
+export function meta({ location }: Route.MetaArgs) {
+	return buildMeta({
+		fullTitle: "Cloak — Invisible AI Assistant for macOS",
+		description:
+			"Cloak is your invisible AI assistant for macOS — stealth in meetings, real-time transcription, and call summaries. Built with Tauri + Rust. Privacy-first, ~10 MB.",
+		path: location.pathname,
+		keywords: [
+			"Cloak AI assistant",
+			"invisible AI",
+			"meeting transcription macOS",
+			"AI call summary",
+			"Tauri Rust app",
+			"privacy AI assistant",
+		],
+	});
 }
 
 function DownloadButton({
@@ -35,7 +42,7 @@ function DownloadButton({
 		<a
 			href={hasUrl ? url : undefined}
 			target={hasUrl ? "_blank" : undefined}
-			rel={hasUrl ? "noreferrer" : undefined}
+			rel={hasUrl ? "noopener noreferrer" : undefined}
 			className={`inline-flex items-center gap-2 text-sm font-medium w-full sm:w-auto justify-center no-underline ${
 				hasUrl ? "comic-btn" : "comic-btn-outline opacity-60 pointer-events-none cursor-not-allowed"
 			}`}
@@ -508,7 +515,7 @@ export default function Cloak() {
 							<a
 								href={macosInstallDocUrl}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="font-display font-bold text-volt-snow hover:text-volt-green transition underline"
 							>
 								step-by-step guide

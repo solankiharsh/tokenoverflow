@@ -5,6 +5,7 @@ import { requireAdmin } from "../lib/admin-auth";
 import { loadContextKey } from "../lib/load-context";
 import { getPostByIdForAdmin } from "../data/blog";
 import { PostEditor, type PostEditorValues } from "../components/PostEditor";
+import { buildMeta } from "../lib/seo";
 
 export async function loader(args: Route.LoaderArgs) {
 	await requireAdmin(args);
@@ -14,12 +15,22 @@ export async function loader(args: Route.LoaderArgs) {
 	return { post };
 }
 
-export function meta({ loaderData }: Route.MetaArgs) {
-	if (!loaderData) return [{ title: "Edit | Admin" }];
-	return [
-		{ title: `Edit: ${loaderData.post.title} | Admin | Harsh Solanki` },
-		{ name: "description", content: "Edit blog post." },
-	];
+export function meta({ loaderData, location }: Route.MetaArgs) {
+	const path = location?.pathname ?? "/admin/posts/edit";
+	if (!loaderData) {
+		return buildMeta({
+			title: "Edit | Admin",
+			description: "Edit blog post.",
+			path,
+			noindex: true,
+		});
+	}
+	return buildMeta({
+		title: `Edit: ${loaderData.post.title} | Admin`,
+		description: "Edit blog post.",
+		path,
+		noindex: true,
+	});
 }
 
 export default function AdminPostsEdit({ loaderData }: Route.ComponentProps) {

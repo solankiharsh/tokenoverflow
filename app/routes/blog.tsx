@@ -3,6 +3,7 @@ import type { Route } from "./+types/blog";
 import { loadContextKey } from "../lib/load-context";
 import { getPosts } from "../data/blog";
 import { externalPosts } from "../data/external-posts";
+import { buildMeta } from "../lib/seo";
 
 export async function loader(args: Route.LoaderArgs) {
 	const env = args.context.get(loadContextKey).cloudflare.env as { DB?: Parameters<typeof getPosts>[0] };
@@ -35,14 +36,21 @@ export async function loader(args: Route.LoaderArgs) {
 	}
 }
 
-export function meta({}: Route.MetaArgs) {
-	return [
-		{ title: "Blog | Harsh Solanki" },
-		{
-			name: "description",
-			content: "AI/ML nuggets, RAG, and writing to learn.",
-		},
-	];
+export function meta({ location }: Route.MetaArgs) {
+	return buildMeta({
+		title: "Writing on applied AI, RAG, and ML platforms",
+		description:
+			"Notes on production AI, retrieval-augmented generation, MLOps, and platform engineering by Harsh Solanki. Occasional posts — mostly for my future self.",
+		path: location.pathname,
+		keywords: [
+			"AI blog",
+			"RAG",
+			"MLOps blog",
+			"applied AI",
+			"machine learning writing",
+			"Harsh Solanki blog",
+		],
+	});
 }
 
 export default function Blog({ loaderData }: Route.ComponentProps) {
@@ -89,7 +97,7 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 								<a
 									href={post.url}
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
 									className="comic-card-hover p-5 block group no-underline"
 								>
 									<h3 className="comic-heading text-lg text-volt-snow group-hover:text-volt-green transition mb-1">

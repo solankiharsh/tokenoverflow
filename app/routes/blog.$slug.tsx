@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import type { Route } from "./+types/blog.$slug";
 import { loadContextKey } from "../lib/load-context";
 import { getPost } from "../data/blog";
+import { blogPostingJsonLd, buildMeta } from "../lib/seo";
 
 export async function loader(args: Route.LoaderArgs) {
 	const env = args.context.get(loadContextKey).cloudflare.env as { DB?: Parameters<typeof getPost>[0] };
@@ -34,16 +35,37 @@ export async function loader(args: Route.LoaderArgs) {
 	}
 }
 
-export function meta({ loaderData }: Route.MetaArgs) {
-	if (!loaderData) return [{ title: "Post | Harsh Solanki" }];
-	return [
-		{ title: `${loaderData.post.title} | Harsh Solanki` },
-		{
-			name: "description",
-			content: loaderData.post.excerpt,
-		},
-	];
+export function meta({ loaderData, params, location }: Route.MetaArgs) {
+	const slug = params.slug ?? "";
+	if (!loaderData) {
+		return buildMeta({
+			title: "Post not found",
+			description: "This blog post could not be found.",
+			path: location?.pathname ?? `/blog/${slug}`,
+			noindex: true,
+		});
+	}
+	const { post } = loaderData;
+	const description = (post.excerpt && post.excerpt.trim().length > 0
+		? post.excerpt
+		: `${post.title} — a post by Harsh Solanki.`).slice(0, 300);
+	return buildMeta({
+		title: post.title,
+		description,
+		path: location?.pathname ?? `/blog/${slug}`,
+		type: "article",
+		publishedTime: post.date,
+		modifiedTime: post.date,
+		jsonLd: blogPostingJsonLd({
+			title: post.title,
+			description,
+			slug: post.slug,
+			publishedTime: post.date,
+			modifiedTime: post.date,
+		}),
+	});
 }
+
 
 export default function BlogSlug({ loaderData }: Route.ComponentProps) {
 	const { post } = loaderData;

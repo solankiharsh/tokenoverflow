@@ -9,6 +9,21 @@ import {
 } from "../data/crm";
 import { StatsCards } from "../components/crm/StatsCards";
 import { ContactCard } from "../components/crm/ContactCard";
+import { buildMeta } from "../lib/seo";
+
+function crmSchemaLikelyMissing(error: unknown): boolean {
+	const parts: string[] = [];
+	if (error instanceof Error) {
+		parts.push(error.message);
+		const c = error.cause;
+		if (c instanceof Error) parts.push(c.message);
+	}
+	const msg = parts.join("\n");
+	return (
+		/no such table/i.test(msg) ||
+		(/Failed query:/i.test(msg) && /form_submissions|contacts|deals/i.test(msg))
+	);
+}
 
 export async function loader(args: Route.LoaderArgs) {
 	await requireAdmin(args);
@@ -17,20 +32,31 @@ export async function loader(args: Route.LoaderArgs) {
 		DB: Parameters<typeof getPipelineStats>[0];
 	};
 
-	const [stats, recentContacts, recentSubmissions] = await Promise.all([
-		getPipelineStats(env.DB),
-		getContacts(env.DB, { limit: 10 }),
-		getSubmissions(env.DB),
-	]);
-
-	return { stats, recentContacts, recentSubmissions };
+	try {
+		const [stats, recentContacts, recentSubmissions] = await Promise.all([
+			getPipelineStats(env.DB),
+			getContacts(env.DB, { limit: 10 }),
+			getSubmissions(env.DB),
+		]);
+		return { stats, recentContacts, recentSubmissions };
+	} catch (e) {
+		if (crmSchemaLikelyMissing(e)) {
+			throw new Error(
+				"CRM tables are missing on D1. From the repo root run: npm run db:crm:remote " +
+					"(or make db-crm-remote). Requires wrangler login; see README “D1 migrations”.",
+			);
+		}
+		throw e;
+	}
 }
 
-export function meta(_args: Route.MetaArgs) {
-	return [
-		{ title: "CRM | Admin | Harsh Solanki" },
-		{ name: "description", content: "Consultancy CRM dashboard." },
-	];
+export function meta({ location }: Route.MetaArgs) {
+	return buildMeta({
+		title: "CRM | Admin",
+		description: "Consultancy CRM dashboard.",
+		path: location.pathname,
+		noindex: true,
+	});
 }
 
 export default function AdminCRM({ loaderData }: Route.ComponentProps) {
