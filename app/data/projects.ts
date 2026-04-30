@@ -7,6 +7,20 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		title: "DerivArena",
+		description:
+			"Gamified trading competitions on the Deriv API. Sortino-ranked leaderboards, deployable AI trading agents, Deriv Miles + Marketplace, and a conversion engine that turns demo traders into depositors. Live: arena.solharsh.com.",
+		href: "https://arena.solharsh.com",
+		tech: ["Go", "Next.js", "PostgreSQL", "Deriv API", "AI"],
+	},
+	{
+		title: "V-K Unit 2049",
+		description:
+			"A Blade Runner-inspired browser toy. Your webcam becomes a live cyberpunk ASCII readout and Gemini delivers a Nexus-style threat assessment in the voice of Deckard, Tyrell, Roy Batty, GLaDOS, HAL 9000, or SHODAN.",
+		href: "/voight-kampff",
+		tech: ["React", "Canvas", "Gemini", "Cloudflare Workers"],
+	},
+	{
 		title: "Deep Research AI Agent",
 		description:
 			"Autonomous due-diligence investigator. Enter a name — the agent runs multi-phase search, extracts entities, debates risk, and builds an identity graph. Live demo on Render.",
