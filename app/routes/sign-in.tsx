@@ -1,12 +1,15 @@
 import { SignIn } from "@clerk/react-router";
 import type { Route } from "./+types/sign-in";
 import { terminalAppearance } from "~/lib/clerk-appearance";
+import { buildMeta } from "~/lib/seo";
 
-export function meta(_args: Route.MetaArgs) {
-	return [
-		{ title: "Sign in | Harsh Solanki" },
-		{ name: "description", content: "Sign in to your account." },
-	];
+export function meta({ location }: Route.MetaArgs) {
+	return buildMeta({
+		title: "Sign in",
+		description: "Sign in to your account.",
+		path: location.pathname,
+		noindex: true,
+	});
 }
 
 export default function SignInPage() {

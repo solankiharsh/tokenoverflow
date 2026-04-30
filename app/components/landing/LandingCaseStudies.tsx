@@ -1,21 +1,21 @@
 import { Link } from "react-router";
 import { SpotlightCard } from "./SpotlightCard";
 
-const CASES = [
+const PRODUCTS = [
 	{
 		name: "WebinarForge",
-		blurb: "End-to-end webinar automation — registration, reminders, and live ops wired into a coherent product story.",
-		highlight: "Product + automation",
+		blurb: "Automated webinar operations stack across registration, reminders, follow-ups, and launch reporting.",
+		highlight: "Automation SaaS",
 	},
 	{
 		name: "Pulse Engine",
-		blurb: "Real-time signal and execution-adjacent infrastructure — reliability and observability first.",
-		highlight: "Systems",
+		blurb: "Real-time intelligence pipeline for signal processing and execution-adjacent automation.",
+		highlight: "Trading Infrastructure",
 	},
 	{
-		name: "PPC attribution",
-		blurb: "Attribution pipelines that reconcile spend, clicks, and outcomes — fewer spreadsheets, more decisions.",
-		highlight: "Data & ML",
+		name: "Attribution Console",
+		blurb: "Marketing intelligence surface that unifies spend, funnel events, and revenue signals in one view.",
+		highlight: "Data Product",
 	},
 ];
 
@@ -24,13 +24,13 @@ export function LandingCaseStudies() {
 		<section className="landing-section-muted py-20 sm:py-28 border-t border-volt-border">
 			<div className="max-w-6xl mx-auto px-4">
 				<p className="font-mono text-xs uppercase tracking-[0.28em] text-volt-purple mb-3">
-					Selected work
+					Products
 				</p>
 				<h2 className="landing-heading text-3xl sm:text-4xl text-volt-snow mb-12">
-					Featured case studies
+					Built products
 				</h2>
 				<div className="grid md:grid-cols-3 gap-4 md:gap-5">
-					{CASES.map((c) => (
+					{PRODUCTS.map((c) => (
 						<SpotlightCard key={c.name} className="p-6 flex flex-col">
 							<span className="font-mono text-[10px] uppercase tracking-wider text-volt-mint mb-3">
 								{c.highlight}
@@ -45,11 +45,11 @@ export function LandingCaseStudies() {
 					))}
 				</div>
 				<p className="mt-8 text-sm text-volt-steel tracking-wide">
-					Detailed write-ups live under{" "}
+					More implementation detail lives under{" "}
 					<Link to="/projects" className="text-volt-mint hover:text-volt-green transition-colors">
 						Projects
 					</Link>{" "}
-					as they ship publicly.
+					and expands as new products ship.
 				</p>
 			</div>
 		</section>

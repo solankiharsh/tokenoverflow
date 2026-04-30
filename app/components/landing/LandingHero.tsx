@@ -30,8 +30,10 @@ export function LandingHero() {
 					ship — from multi-agent pipelines to algorithmic trading engines.
 				</h1>
 				<p className="landing-animate-in landing-animate-delay-2 text-lg sm:text-xl text-volt-parchment max-w-2xl leading-relaxed mb-10 tracking-wide">
-					Engineering Lead, Applied AI at Deriv. Fractional CTO / technical
-					sparring partner for teams that need rigor, not slide decks.
+					Engineering Lead, Applied AI at Deriv. Four years before that inside
+					Target's ML Platform — feature store, Kernels-as-a-Service notebooks,
+					MLflow. Fractional CTO / technical sparring partner for teams that
+					need rigor, not slide decks.
 				</p>
 				<div className="landing-animate-in landing-animate-delay-3 flex flex-wrap gap-3">
 					<a

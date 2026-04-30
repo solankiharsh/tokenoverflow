@@ -29,7 +29,7 @@ export function Footer() {
 							key={href}
 							href={href}
 							target="_blank"
-							rel="noreferrer"
+							rel="noopener noreferrer"
 							className="font-medium text-volt-fog hover:text-white transition-colors"
 						>
 							{label}

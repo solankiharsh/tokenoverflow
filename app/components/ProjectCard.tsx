@@ -38,7 +38,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 					<a
 						href={project.href}
 						target="_blank"
-						rel="noreferrer"
+						rel="noopener noreferrer"
 						className="comic-btn-outline text-sm py-2 px-4 inline-flex items-center justify-center gap-1 no-underline mt-auto w-fit"
 					>
 						VIEW →

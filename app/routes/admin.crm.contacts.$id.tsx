@@ -5,6 +5,7 @@ import { requireAdmin } from "../lib/admin-auth";
 import { loadContextKey } from "../lib/load-context";
 import { getContact } from "../data/crm";
 import { ActivityFeed } from "../components/crm/ActivityFeed";
+import { buildMeta } from "../lib/seo";
 
 export async function loader(args: Route.LoaderArgs) {
 	await requireAdmin(args);
@@ -20,14 +21,16 @@ export async function loader(args: Route.LoaderArgs) {
 	return { contact };
 }
 
-export function meta({ data }: Route.MetaArgs) {
+export function meta({ data, location }: Route.MetaArgs) {
 	const name = data?.contact
-		? `${data.contact.firstName} ${data.contact.lastName ?? ""}`
+		? `${data.contact.firstName} ${data.contact.lastName ?? ""}`.trim()
 		: "Contact";
-	return [
-		{ title: `${name} | CRM | Admin` },
-		{ name: "description", content: `Contact detail for ${name}.` },
-	];
+	return buildMeta({
+		title: `${name} | CRM | Admin`,
+		description: `Contact detail for ${name}.`,
+		path: location?.pathname ?? "/admin/crm/contacts",
+		noindex: true,
+	});
 }
 
 const STAGE_COLORS: Record<string, string> = {

@@ -2,24 +2,24 @@ import { SpotlightCard } from "./SpotlightCard";
 
 const SERVICES = [
 	{
-		title: "Multi-agent & orchestration",
-		desc: "Design and ship agentic workflows, tool use, evals, and guardrails that survive real traffic.",
-		tag: "Agents",
+		title: "AI Agent Development & Custom LLM Fine-tuning",
+		desc: "Build domain-specific assistants and tuned models that map to real workflows, not demo prompts.",
+		tag: "Capability",
 	},
 	{
-		title: "Trading & quant-adjacent systems",
-		desc: "Low-latency pipelines, signal research infra, and risk-aware automation — not toy backtests.",
-		tag: "Systems",
+		title: "Workflow Automation & Systems Integration",
+		desc: "Connect siloed tools into dependable automations with clean handoffs, guardrails, and observability.",
+		tag: "Capability",
 	},
 	{
-		title: "AI product & platform",
-		desc: "From RAG that actually works to observability, cost controls, and CI for models in production.",
-		tag: "Platform",
+		title: "Data Operations & Predictive Analytics",
+		desc: "Turn fragmented events into decision-ready pipelines and forecasting surfaces teams can actually trust.",
+		tag: "Capability",
 	},
 	{
-		title: "Team lift & architecture reviews",
-		desc: "Hands-on pairing, ADRs, and pragmatic roadmaps so your team owns the stack after I leave.",
-		tag: "Leadership",
+		title: "Digital Infrastructure & Cloud AI Scaling",
+		desc: "Ship production AI systems with secure infrastructure, resilient deploy paths, and performance controls.",
+		tag: "Capability",
 	},
 ];
 
@@ -31,11 +31,11 @@ export function LandingServices() {
 					Services
 				</p>
 				<h2 className="landing-heading text-3xl sm:text-4xl text-volt-snow mb-4">
-					How I work with teams
+					Core capabilities
 				</h2>
 				<p className="text-volt-parchment max-w-2xl mb-12 leading-relaxed text-base tracking-wide">
-					Focused engagements: ship the hard parts, document the rest, and
-					leave you with systems you can operate.
+					I combine deep technical execution with a senior-led engagement
+					model so every AI build ships as a strategic business asset.
 				</p>
 				<div className="grid sm:grid-cols-2 gap-4 md:gap-5">
 					{SERVICES.map((s) => (

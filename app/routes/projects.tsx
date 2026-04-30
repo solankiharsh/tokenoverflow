@@ -1,15 +1,22 @@
 import type { Route } from "./+types/projects";
 import { projects } from "../data/projects";
 import { ProjectCard } from "../components/ProjectCard";
+import { buildMeta } from "../lib/seo";
 
-export function meta({}: Route.MetaArgs) {
-	return [
-		{ title: "Projects | Harsh Solanki" },
-		{
-			name: "description",
-			content: "Side projects and things built: NLP, ML tooling, FastAPI, this site.",
-		},
-	];
+export function meta({ location }: Route.MetaArgs) {
+	return buildMeta({
+		title: "Projects — applied AI, NLP, and platform work",
+		description:
+			"Selected side projects from Harsh Solanki: AI agents, NLP tooling, FastAPI services, ML pipelines, and the system that powers this site.",
+		path: location.pathname,
+		keywords: [
+			"Harsh Solanki projects",
+			"AI side projects",
+			"NLP projects",
+			"FastAPI",
+			"machine learning projects",
+		],
+	});
 }
 
 export default function Projects() {

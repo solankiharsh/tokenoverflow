@@ -15,6 +15,7 @@ import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { terminalAppearance } from "./lib/clerk-appearance";
 import { loadContextKey } from "./lib/load-context";
+import { rootMeta } from "./lib/seo";
 import "./app.css";
 
 type ClerkEnv = {
@@ -50,7 +51,25 @@ export const links: Route.LinksFunction = () => [
 		rel: "stylesheet",
 		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
 	},
+	{ rel: "icon", href: "/favicon.ico", sizes: "any" },
+	{ rel: "apple-touch-icon", href: "/favicon.ico" },
+	{ rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
+	// Hint to search engines that comments / mentions live on these profiles.
+	{
+		rel: "me",
+		href: "https://www.linkedin.com/in/solankiharsh/",
+	},
 ];
+
+/**
+ * Site-wide default meta. Individual routes extend or override these via
+ * their own `meta` exports — React Router merges by name/property so route
+ * exports take precedence. Canonical URLs are intentionally NOT emitted
+ * here; each leaf route emits its own via `buildMeta` to avoid duplicates.
+ */
+export function meta() {
+	return rootMeta();
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (
@@ -58,6 +77,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="theme-color" content="#0a0e0d" />
+				<meta name="color-scheme" content="dark" />
+				<meta name="format-detection" content="telephone=no" />
+				<meta name="author" content="Harsh Solanki" />
 				<Meta />
 				<Links />
 			</head>

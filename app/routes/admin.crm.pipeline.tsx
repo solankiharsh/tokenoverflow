@@ -4,6 +4,7 @@ import { requireAdmin } from "../lib/admin-auth";
 import { loadContextKey } from "../lib/load-context";
 import { getDealsPipeline } from "../data/crm";
 import { PipelineBoard } from "../components/crm/PipelineBoard";
+import { buildMeta } from "../lib/seo";
 
 export async function loader(args: Route.LoaderArgs) {
 	await requireAdmin(args);
@@ -15,11 +16,13 @@ export async function loader(args: Route.LoaderArgs) {
 	return { pipeline };
 }
 
-export function meta(_args: Route.MetaArgs) {
-	return [
-		{ title: "Pipeline | CRM | Admin | Harsh Solanki" },
-		{ name: "description", content: "Deal pipeline kanban board." },
-	];
+export function meta({ location }: Route.MetaArgs) {
+	return buildMeta({
+		title: "Pipeline | CRM | Admin",
+		description: "Deal pipeline kanban board.",
+		path: location.pathname,
+		noindex: true,
+	});
 }
 
 export default function AdminCRMPipeline({ loaderData }: Route.ComponentProps) {

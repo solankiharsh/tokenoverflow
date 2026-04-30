@@ -1,6 +1,10 @@
 import { Link } from "react-router";
 import type { BlogPost } from "../../data/blog";
 
+function coverImageForPost(post: BlogPost): string {
+	return `https://picsum.photos/seed/${encodeURIComponent(post.slug)}/800/460`;
+}
+
 export function LandingBlogTeaser({ posts }: { posts: BlogPost[] }) {
 	if (posts.length === 0) {
 		return (
@@ -50,17 +54,31 @@ export function LandingBlogTeaser({ posts }: { posts: BlogPost[] }) {
 						<li key={post.slug}>
 							<Link
 								to={`/blog/${post.slug}`}
-								className="group block rounded-lg border border-volt-border bg-volt-carbon p-5 hover:border-volt-green/40 transition-all no-underline h-full shadow-[0_0_15px_rgba(92,88,85,0.15)]"
+								className="group block overflow-hidden rounded-lg border border-volt-border bg-volt-carbon hover:border-volt-green/40 transition-all no-underline h-full shadow-[0_0_15px_rgba(92,88,85,0.15)]"
 							>
-								<p className="font-mono text-[10px] text-volt-steel mb-2">
-									{post.date}
-								</p>
-								<h3 className="landing-heading text-lg text-volt-snow group-hover:text-volt-mint transition-colors mb-2">
-									{post.title}
-								</h3>
-								<p className="text-sm text-volt-parchment line-clamp-2 tracking-wide">
-									{post.excerpt}
-								</p>
+								<div className="relative h-44 overflow-hidden border-b border-volt-border">
+									<img
+										src={coverImageForPost(post)}
+										alt={`Cover image for ${post.title}`}
+										loading="lazy"
+										decoding="async"
+										width={800}
+										height={460}
+										className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-volt-abyss/70 via-volt-abyss/20 to-transparent" />
+								</div>
+								<div className="p-5">
+									<p className="font-mono text-[10px] text-volt-steel mb-2">
+										{new Date(post.date).toLocaleDateString()}
+									</p>
+									<h3 className="landing-heading text-lg text-volt-snow group-hover:text-volt-mint transition-colors mb-2">
+										{post.title}
+									</h3>
+									<p className="text-sm text-volt-parchment line-clamp-2 tracking-wide">
+										{post.excerpt}
+									</p>
+								</div>
 							</Link>
 						</li>
 					))}
