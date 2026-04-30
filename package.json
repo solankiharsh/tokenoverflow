@@ -31,6 +31,7 @@
 		"@types/react": "^19.0.0",
 		"@types/react-dom": "^19.0.0",
 		"drizzle-kit": "^0.31.9",
+		"sharp": "^0.34.5",
 		"tailwindcss": "4.1.17",
 		"typescript": "5.9.3",
 		"vite": "^6.0.0",
@@ -49,7 +50,8 @@
 		"db:crm:local": "wrangler d1 execute tokenoverflow-blog --local --file=./migrations/0004_create_crm_tables.sql",
 		"db:crm:remote": "wrangler d1 execute tokenoverflow-blog --remote --file=./migrations/0004_create_crm_tables.sql",
 		"preview": "npm run build && vite preview",
-		"typecheck": "npm run typegen && tsc -b"
+		"typecheck": "npm run typegen && tsc -b",
+		"build:images": "node scripts/build-images.mjs"
 	},
 	"type": "module"
 }

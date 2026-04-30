@@ -116,7 +116,7 @@ export function meta({ location }: Route.MetaArgs) {
 	return buildMeta({
 		title: "About — Engineering Lead, Applied AI",
 		description:
-			"Harsh Solanki — Engineering Lead, Applied AI at Deriv. 9+ years in ML platform work: feature stores, Kernels-as-a-Service, MLflow. 3× AWS certified, UChicago PGP DS&ML.",
+			"Harsh Solanki — Engineering Lead, Applied AI at Deriv (Dubai). 9+ years building ML platforms: feature stores, KaaS notebooks, MLflow. 3× AWS certified.",
 		path: location.pathname,
 		type: "profile",
 		keywords: [
@@ -158,14 +158,19 @@ export default function About() {
 				</p>
 				<section className="border border-volt-border p-5 bg-volt-carbon" id="ai-impact">
 					<figure className="m-0">
-						<img
-							src="/harsh-solanki-ai-leadership-infographic.png"
-							alt="Harsh Solanki: Driving AI Innovation & Leadership at Deriv — Strategic AI Product Leadership (6+ revenue-generating products including Nexus, Site Sense, SponsorFlow; 7-person engineering team; high-velocity workflows, compliance, product leads) and Community Engagement & AI Advocacy (300+ AI Talent Sprint participants, Everyday AI global workshops in Dubai and Jordan, global hackathon mentorship with lablab.ai)"
-							className="w-full h-auto rounded border border-volt-border"
-							loading="lazy"
-							width={1200}
-							height={675}
-						/>
+						<picture>
+							<source srcSet="/harsh-solanki-ai-leadership-infographic.avif" type="image/avif" />
+							<source srcSet="/harsh-solanki-ai-leadership-infographic.webp" type="image/webp" />
+							<img
+								src="/harsh-solanki-ai-leadership-infographic.png"
+								alt="Harsh Solanki: Driving AI Innovation & Leadership at Deriv — Strategic AI Product Leadership (6+ revenue-generating products including Nexus, Site Sense, SponsorFlow; 7-person engineering team; high-velocity workflows, compliance, product leads) and Community Engagement & AI Advocacy (300+ AI Talent Sprint participants, Everyday AI global workshops in Dubai and Jordan, global hackathon mentorship with lablab.ai)"
+								className="w-full h-auto rounded border border-volt-border"
+								loading="lazy"
+								decoding="async"
+								width={1200}
+								height={675}
+							/>
+						</picture>
 						<figcaption className="comic-heading text-xs mt-2 text-volt-steel text-center">
 							AI leadership & impact at Deriv — product, team, and community.
 						</figcaption>
@@ -335,19 +340,39 @@ export default function About() {
 								{item.date && (
 									<p className="text-xs text-volt-parchment font-mono">{item.date}</p>
 								)}
-								{item.image && (
+							{item.image && (() => {
+								const stem = item.image.replace(/\.(png|jpe?g)$/i, "");
+								const isPng = /\.(png|jpe?g)$/i.test(item.image);
+								return (
 									<figure className="m-0">
-										<img
-											src={item.image}
-											alt={item.title}
-											className="w-full max-w-md h-auto rounded border border-volt-border"
-											loading="lazy"
-											decoding="async"
-											width={1200}
-											height={675}
-										/>
+										{isPng ? (
+											<picture>
+												<source srcSet={`${stem}.avif`} type="image/avif" />
+												<source srcSet={`${stem}.webp`} type="image/webp" />
+												<img
+													src={item.image}
+													alt={item.title}
+													className="w-full max-w-md h-auto rounded border border-volt-border"
+													loading="lazy"
+													decoding="async"
+													width={1200}
+													height={675}
+												/>
+											</picture>
+										) : (
+											<img
+												src={item.image}
+												alt={item.title}
+												className="w-full max-w-md h-auto rounded border border-volt-border"
+												loading="lazy"
+												decoding="async"
+												width={1200}
+												height={675}
+											/>
+										)}
 									</figure>
-								)}
+								);
+							})()}
 								{item.videoUrl && getVideoEmbedUrl(item.videoUrl) && (
 									<div className="aspect-video w-full max-w-lg rounded-lg border border-volt-border overflow-hidden bg-volt-abyss">
 										<iframe
