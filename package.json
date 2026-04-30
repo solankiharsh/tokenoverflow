@@ -16,8 +16,10 @@
 	"dependencies": {
 		"@clerk/backend": "^2.31.0",
 		"@clerk/react-router": "^2.4.4",
+		"@google/genai": "^1.40.0",
 		"drizzle-orm": "^0.45.1",
 		"isbot": "5.1.32",
+		"lucide-react": "^0.563.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-markdown": "^10.1.0",

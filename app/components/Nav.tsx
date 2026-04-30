@@ -13,6 +13,7 @@ const navItems = [
 	{ to: "/about", label: "About" },
 	{ to: "/projects", label: "Projects" },
 	{ to: "/cloak", label: "Cloak" },
+	{ to: "/voight-kampff", label: "V-K" },
 	{ to: "/blog", label: "Blog" },
 	{ to: "#subscribe", label: "Subscribe" },
 ];

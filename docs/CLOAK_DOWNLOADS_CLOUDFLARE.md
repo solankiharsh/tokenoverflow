@@ -34,21 +34,21 @@ GitHub **Releases** only show something after you **create a release** and **upl
    ```
 
 4. **Artifacts location** (version in your repo is `0.1.9`, so filenames include that):
-   - **macOS DMG:**  
-     `src-tauri/target/release/bundle/dmg/`  
-     - `Cloak_0.1.9_aarch64.dmg` (Apple Silicon)  
+   - **macOS DMG:**
+     `src-tauri/target/release/bundle/dmg/`
+     - `Cloak_0.1.9_aarch64.dmg` (Apple Silicon)
      - `Cloak_0.1.9_x64.dmg` (Intel)
-   - **Windows:**  
-     `src-tauri/target/release/bundle/msi/` and `src-tauri/target/release/bundle/nsis/`  
+   - **Windows:**
+     `src-tauri/target/release/bundle/msi/` and `src-tauri/target/release/bundle/nsis/`
      - e.g. `Cloak_0.1.9_x64_en-US.msi`, `Cloak_0.1.9_x64-setup.exe`
-   - **Linux:**  
+   - **Linux:**
      `src-tauri/target/release/bundle/` — `.deb`, `.AppImage`, `.rpm` (if you built on Linux)
 
-5. **Optional — Publish a GitHub Release:**  
-   - On GitHub: **Releases** → **“Create a new release”**.  
-   - Tag: e.g. `v0.1.9` (create the tag from your main branch).  
-   - Title: e.g. `Cloak 0.1.9`.  
-   - Attach the DMG (and other installers) as **Release assets**.  
+5. **Optional — Publish a GitHub Release:**
+   - On GitHub: **Releases** → **“Create a new release”**.
+   - Tag: e.g. `v0.1.9` (create the tag from your main branch).
+   - Title: e.g. `Cloak 0.1.9`.
+   - Attach the DMG (and other installers) as **Release assets**.
    - Publish. After that, the Releases page will show the release and the download links (e.g. `https://github.com/solankiharsh/invisible-ai-assistant/releases/download/v0.1.9/Cloak_0.1.9_aarch64.dmg`).
 
 Whether you use GitHub Releases or Cloudflare R2 (or both), you **always** create the artifacts by running `npm run tauri build` in invisible-ai-assistant.
@@ -108,7 +108,7 @@ If you haven’t built yet, follow **Step 0** above. Then:
 
 1. Open the bucket → **Objects** → **Upload**.
 2. Upload each file (DMG, MSI, EXE, etc.).
-3. Use simple, stable keys (e.g. `Cloak_1.0.0_aarch64.dmg`). The download URL will be:  
+3. Use simple, stable keys (e.g. `Cloak_1.0.0_aarch64.dmg`). The download URL will be:
    `<base-url>/Cloak_1.0.0_aarch64.dmg`.
 
 **Option B — Wrangler CLI**
@@ -125,8 +125,8 @@ If you haven’t built yet, follow **Step 0** above. Then:
    wrangler r2 object put cloak-releases/Cloak_1.0.0_aarch64.dmg --file=./Cloak_1.0.0_aarch64.dmg --content-type=application/octet-stream
    ```
 
-After upload, each file’s URL is:  
-`<base-url>/<object-key>`  
+After upload, each file’s URL is:
+`<base-url>/<object-key>`
 e.g. `https://pub-xxxx.r2.dev/cloak-releases/Cloak_1.0.0_aarch64.dmg`.
 
 ---
