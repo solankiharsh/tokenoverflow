@@ -24,9 +24,7 @@ function getErrorMessage(err: unknown): string {
 
 /**
  * Build a Content-Security-Policy that covers every third-party origin the
- * app loads. Keep this in lockstep with `root.tsx` and any dependency that
- * fetches scripts/fonts/images at runtime (Clerk, Google Fonts, Cloudflare
- * Turnstile, the Cloak DMG host).
+ * app loads (Google Fonts, Cloudflare Turnstile if used, embedded media).
  *
  * Notes on `'unsafe-inline'`:
  *   - React Router currently injects an inline route-manifest script. Without
@@ -40,11 +38,9 @@ const CSP = [
 	"base-uri 'self'",
 	"object-src 'none'",
 	"frame-ancestors 'self'",
-	"form-action 'self' https://*.clerk.accounts.dev https://*.clerk.com",
+	"form-action 'self'",
 	[
 		"script-src 'self' 'unsafe-inline'",
-		"https://*.clerk.accounts.dev",
-		"https://*.clerk.com",
 		"https://challenges.cloudflare.com",
 	].join(" "),
 	"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
@@ -52,17 +48,9 @@ const CSP = [
 	[
 		"img-src 'self' data: blob: https:",
 	].join(" "),
-	[
-		"connect-src 'self'",
-		"https://*.clerk.accounts.dev",
-		"https://*.clerk.com",
-		"https://api.clerk.com",
-		"https://clerk-telemetry.com",
-	].join(" "),
+	"connect-src 'self'",
 	[
 		"frame-src 'self'",
-		"https://*.clerk.accounts.dev",
-		"https://*.clerk.com",
 		"https://challenges.cloudflare.com",
 		"https://www.youtube.com",
 		"https://player.vimeo.com",
@@ -122,7 +110,7 @@ const DEBUG_500_HTML = `
     <li>Go to <strong>Logs</strong> → <strong>Real-time Logs</strong></li>
     <li>Reload this page, then look for lines starting with <code>[tokenoverflow] Server error:</code> or <code>[tokenoverflow] Unexpected server error:</code></li>
   </ol>
-  <p>Common causes: missing <strong>CLERK_PUBLISHABLE_KEY</strong> / <strong>CLERK_SECRET_KEY</strong> in the worker’s Variables/Secrets, or missing <strong>D1</strong> binding / migrations not run on production.</p>
+  <p>Common causes: missing <strong>D1</strong> binding / migrations not run on production, or an unexpected server error during rendering.</p>
 </body></html>`;
 
 export default {
@@ -132,7 +120,6 @@ export default {
 		const requestContext = new RouterContextProvider();
 		const cloudflare = { env, ctx };
 		requestContext.set(loadContextKey, { cloudflare, debug });
-		// Expose cloudflare.env so Clerk's getEnvVariable (context.cloudflare.env) finds CLERK_* keys
 		(requestContext as unknown as { cloudflare: typeof cloudflare }).cloudflare = cloudflare;
 		try {
 			const response = await requestHandler(request, requestContext);

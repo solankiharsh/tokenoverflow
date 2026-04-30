@@ -7,13 +7,6 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		title: "Cloak",
-		description:
-			"Invisible AI assistant for meetings and calls. Real-time transcription, call summaries, Google Calendar, knowledge base. Download for macOS.",
-		href: "/cloak",
-		tech: ["Tauri", "React", "AI"],
-	},
-	{
 		title: "DerivArena",
 		description:
 			"Gamified trading competitions on the Deriv API. Sortino-ranked leaderboards, deployable AI trading agents, Deriv Miles + Marketplace, and a conversion engine that turns demo traders into depositors. Live: arena.solharsh.com.",

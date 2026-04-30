@@ -1,7 +1,4 @@
-# Copy to .dev.vars and fill in your keys (never commit .dev.vars).
-# Get keys from https://dashboard.clerk.com
-VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
+# Copy to .dev.vars for local Worker secrets (never commit .dev.vars).
 
 # Optional: Cal.com, Calendly, or n8n booking page — home page "Book a call" CTA
 # VITE_BOOKING_URL=https://cal.com/your-handle/strategy
