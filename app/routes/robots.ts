@@ -6,6 +6,7 @@ const DISALLOWED_PATHS = [
 	"/api/",
 	"/sign-in",
 	"/sign-up",
+	"/cloak",
 	"/wiki",
 ];
 

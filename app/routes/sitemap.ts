@@ -22,7 +22,6 @@ const STATIC_ENTRIES: SitemapEntry[] = [
 	{ loc: "/about", changefreq: "monthly", priority: "0.8" },
 	{ loc: "/projects", changefreq: "monthly", priority: "0.8" },
 	{ loc: "/blog", changefreq: "weekly", priority: "0.9" },
-	{ loc: "/cloak", changefreq: "monthly", priority: "0.7" },
 ];
 
 function escapeXml(value: string): string {

@@ -7,13 +7,6 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		title: "Cloak",
-		description:
-			"Invisible AI assistant for meetings and calls. Real-time transcription, call summaries, Google Calendar, knowledge base. Download for macOS.",
-		href: "/cloak",
-		tech: ["Tauri", "React", "AI"],
-	},
-	{
 		title: "Deep Research AI Agent",
 		description:
 			"Autonomous due-diligence investigator. Enter a name — the agent runs multi-phase search, extracts entities, debates risk, and builds an identity graph. Live demo on Render.",
