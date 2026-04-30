@@ -40,7 +40,7 @@ export function meta({ location }: Route.MetaArgs) {
 	return buildMeta({
 		title: "Writing on applied AI, RAG, and ML platforms",
 		description:
-			"Notes on production AI, retrieval-augmented generation, MLOps, and platform engineering by Harsh Solanki. Occasional posts — mostly for my future self.",
+			"Notes on production AI, retrieval-augmented generation, and MLOps by Harsh Solanki. Occasional posts on engineering patterns and lessons from the field.",
 		path: location.pathname,
 		keywords: [
 			"AI blog",

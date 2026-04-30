@@ -48,7 +48,7 @@ export function meta({ loaderData, params, location }: Route.MetaArgs) {
 	const { post } = loaderData;
 	const description = (post.excerpt && post.excerpt.trim().length > 0
 		? post.excerpt
-		: `${post.title} — a post by Harsh Solanki.`).slice(0, 300);
+		: `${post.title} — a post by Harsh Solanki.`).slice(0, 160);
 	return buildMeta({
 		title: post.title,
 		description,

@@ -28,7 +28,7 @@ export function meta({ location }: Route.MetaArgs) {
 	return buildMeta({
 		fullTitle: "Harsh Solanki — Production AI systems that ship",
 		description:
-			"Engineering Lead, Applied AI at Deriv (Dubai). I architect production AI systems that ship — multi-agent pipelines, algorithmic trading engines, MLOps platforms, and the writing in between.",
+			"Engineering Lead, Applied AI at Deriv. I architect production AI systems — multi-agent pipelines, algorithmic trading engines, and MLOps platforms.",
 		path: location.pathname,
 		keywords: [
 			"Harsh Solanki",
