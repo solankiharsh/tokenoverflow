@@ -89,11 +89,11 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 			{externalPosts.length > 0 && (
 				<section className="mt-12 pt-8 border-t-2 border-volt-border">
 					<h2 className="comic-heading text-xl text-volt-snow mb-4">
-						Also on Medium
+						Elsewhere
 					</h2>
 					<ul className="space-y-4">
-						{externalPosts.map((post, i) => (
-							<li key={post.url + i}>
+						{externalPosts.map((post) => (
+							<li key={post.url}>
 								<a
 									href={post.url}
 									target="_blank"
@@ -103,13 +103,16 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 									<h3 className="comic-heading text-lg text-volt-snow group-hover:text-volt-green transition mb-1">
 										{post.title}
 									</h3>
+									<p className="text-xs text-volt-steel mb-2 font-mono">
+										{post.platform}
+									</p>
 									{post.date && (
 										<p className="text-xs text-volt-steel mb-2 font-mono">
 											{post.date}
 										</p>
 									)}
 									<span className="font-display font-bold text-sm text-volt-snow group-hover:text-volt-green transition inline-block">
-										Read on Medium →
+										Read on {post.platform} →
 									</span>
 								</a>
 							</li>
