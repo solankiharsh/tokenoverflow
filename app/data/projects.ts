@@ -21,6 +21,13 @@ export const projects: Project[] = [
 		tech: ["React", "Canvas", "Gemini", "Cloudflare Workers"],
 	},
 	{
+		title: "Interview Architecture Studio",
+		description:
+			"An interactive system-design interview walkthrough with project stories, HLD and LLD diagrams, sequence flows, and example payloads.",
+		href: "/interview-architecture-studio.html",
+		tech: ["HTML", "JavaScript", "Mermaid", "System Design"],
+	},
+	{
 		title: "Deep Research AI Agent",
 		description:
 			"Autonomous due-diligence investigator. Enter a name — the agent runs multi-phase search, extracts entities, debates risk, and builds an identity graph. Live demo on Render.",
