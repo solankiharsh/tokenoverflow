@@ -2,6 +2,7 @@ import { SubscribeForm } from "./SubscribeForm";
 
 const socials = [
 	{ href: "https://www.linkedin.com/in/solankiharsh/", label: "LinkedIn" },
+	{ href: "https://own.page/solharsh", label: "Own.page" },
 	{ href: "https://github.com/solankiharsh", label: "GitHub" },
 	{ href: "https://www.facebook.com/herschevardhan", label: "Facebook" },
 	{ href: "https://x.com/HarshSolan24317", label: "X" },

@@ -51,6 +51,13 @@ export function LandingHero() {
 					>
 						View selected work
 					</Link>
+					<a
+						href="/resume.pdf"
+						download="Harsh-Solanki-AI-Leader.pdf"
+						className="comic-btn-outline px-6 py-3.5 text-sm no-underline inline-flex items-center justify-center"
+					>
+						Download resume
+					</a>
 					<Link
 						to="/blog"
 						className="inline-flex items-center justify-center px-4 py-3.5 text-sm text-volt-steel hover:text-volt-mint transition-colors no-underline"

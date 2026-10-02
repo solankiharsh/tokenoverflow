@@ -28,6 +28,7 @@ export const SITE = {
 		location: "Dubai, UAE",
 		sameAs: [
 			"https://www.linkedin.com/in/solankiharsh/",
+			"https://own.page/solharsh",
 			"https://github.com/solankiharsh",
 			"https://x.com/HarshSolan24317",
 			"https://medium.com/@solharsh",

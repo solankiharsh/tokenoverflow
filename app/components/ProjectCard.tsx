@@ -5,7 +5,8 @@ interface ProjectCardProps {
 	project: Project;
 }
 
-const isInternal = (href: string) => href.startsWith("/");
+const isInternal = (href: string) =>
+	href.startsWith("/") && !href.endsWith(".html");
 
 export function ProjectCard({ project }: ProjectCardProps) {
 	return (

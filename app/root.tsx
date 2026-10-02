@@ -56,6 +56,10 @@ export const links: Route.LinksFunction = () => [
 		rel: "me",
 		href: "https://www.linkedin.com/in/solankiharsh/",
 	},
+	{
+		rel: "me",
+		href: "https://own.page/solharsh",
+	},
 ];
 
 /**
