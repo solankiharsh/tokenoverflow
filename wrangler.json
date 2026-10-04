@@ -10,6 +10,16 @@
     "enabled": true
   },
   "upload_source_maps": true,
+  "routes": [
+    {
+      "pattern": "solharsh.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.solharsh.com",
+      "custom_domain": true
+    }
+  ],
   "vars": {
     "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
   },
