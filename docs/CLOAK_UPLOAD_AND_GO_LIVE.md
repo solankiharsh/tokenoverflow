@@ -6,9 +6,9 @@ Use this checklist so people can download Cloak from your site.
 
 ## What you have
 
-After `npm run tauri build` in **invisible-ai-assistant**:
+After `npm run tauri build` in **cloak-cluely-ai-assistant**:
 
-| File | Path (in invisible-ai-assistant) |
+| File | Path (in cloak-cluely-ai-assistant) |
 |------|----------------------------------|
 | **Apple Silicon DMG** | `src-tauri/target/release/bundle/dmg/Cloak_0.1.9_aarch64.dmg` |
 | **Intel DMG** | `src-tauri/target/release/bundle/dmg/Cloak_0.1.9_x64.dmg` (only if you built on Intel or universal) |
@@ -21,14 +21,14 @@ You only need the **Apple Silicon** one to start (most Macs today). Add Intel la
 
 **Where:** GitHub, same repo as the app.
 
-1. Open **https://github.com/solankiharsh/invisible-ai-assistant**
+1. Open **https://github.com/solankiharsh/cloak-cluely-ai-assistant**
 2. **Releases** → **Create a new release**
 3. **Tag:** `v0.1.9` (create from main)
 4. **Title:** `Cloak 0.1.9`
 5. **Attach:** drag `Cloak_0.1.9_aarch64.dmg` into “Release assets”
 6. **Publish**
 7. Copy the asset URL, e.g.
-   `https://github.com/solankiharsh/invisible-ai-assistant/releases/download/v0.1.9/Cloak_0.1.9_aarch64.dmg`
+   `https://github.com/solankiharsh/cloak-cluely-ai-assistant/releases/download/v0.1.9/Cloak_0.1.9_aarch64.dmg`
 
 **Wire tokenoverflow:**
 
@@ -36,7 +36,7 @@ You only need the **Apple Silicon** one to start (most Macs today). Add Intel la
    ```env
    VITE_CLOAK_VERSION=app-v0.1.9
    VITE_CLOAK_RELEASED=2/17/2026
-   VITE_CLOAK_DMG_ARM64=https://github.com/solankiharsh/invisible-ai-assistant/releases/download/v0.1.9/Cloak_0.1.9_aarch64.dmg
+   VITE_CLOAK_DMG_ARM64=https://github.com/solankiharsh/cloak-cluely-ai-assistant/releases/download/v0.1.9/Cloak_0.1.9_aarch64.dmg
    ```
 9. Rebuild and deploy tokenoverflow:
    `npm run build && npm run deploy` (or your deploy command)
@@ -80,7 +80,7 @@ If you still want to try:
 
 1. In **tokenoverflow**, create a folder for static assets if it doesn’t exist (e.g. `public/` at project root). With Vite, files in `public/` are served at the site root.
 2. Copy the DMG into it, e.g.
-   `cp /path/to/invisible-ai-assistant/src-tauri/target/release/bundle/dmg/Cloak_0.1.9_aarch64.dmg tokenoverflow/public/`
+   `cp /path/to/cloak-cluely-ai-assistant/src-tauri/target/release/bundle/dmg/Cloak_0.1.9_aarch64.dmg tokenoverflow/public/`
 3. In **tokenoverflow** `.env`, point to your own origin:
    `VITE_CLOAK_DMG_ARM64=/Cloak_0.1.9_aarch64.dmg`
    (or your full site URL + path, e.g. `https://yoursite.com/Cloak_0.1.9_aarch64.dmg`)
@@ -104,7 +104,7 @@ Set these where you run `npm run build` (e.g. `.env` for local, CI/deploy env fo
 
 ## Quick “go live” checklist
 
-- [ ] DMG built: `invisible-ai-assistant/src-tauri/target/release/bundle/dmg/Cloak_0.1.9_aarch64.dmg`
+- [ ] DMG built: `cloak-cluely-ai-assistant/src-tauri/target/release/bundle/dmg/Cloak_0.1.9_aarch64.dmg`
 - [ ] File uploaded somewhere: **GitHub Release** (Option A) or **R2** (Option B)
 - [ ] `VITE_CLOAK_DMG_ARM64` set in tokenoverflow (in `.env` or deploy env) to that file’s URL
 - [ ] tokenoverflow rebuilt and deployed

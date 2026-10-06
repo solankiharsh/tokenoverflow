@@ -18,9 +18,9 @@ GitHub **Releases** only show something after you **create a release** and **upl
 
 ### Build and where to find the files
 
-1. Clone and open **invisible-ai-assistant**:
+1. Clone and open **cloak-cluely-ai-assistant**:
    ```bash
-   cd /path/to/invisible-ai-assistant
+   cd /path/to/cloak-cluely-ai-assistant
    ```
 
 2. Install dependencies:
@@ -49,9 +49,9 @@ GitHub **Releases** only show something after you **create a release** and **upl
    - Tag: e.g. `v0.1.9` (create the tag from your main branch).
    - Title: e.g. `Cloak 0.1.9`.
    - Attach the DMG (and other installers) as **Release assets**.
-   - Publish. After that, the Releases page will show the release and the download links (e.g. `https://github.com/solankiharsh/invisible-ai-assistant/releases/download/v0.1.9/Cloak_0.1.9_aarch64.dmg`).
+   - Publish. After that, the Releases page will show the release and the download links (e.g. `https://github.com/solankiharsh/cloak-cluely-ai-assistant/releases/download/v0.1.9/Cloak_0.1.9_aarch64.dmg`).
 
-Whether you use GitHub Releases or Cloudflare R2 (or both), you **always** create the artifacts by running `npm run tauri build` in invisible-ai-assistant.
+Whether you use GitHub Releases or Cloudflare R2 (or both), you **always** create the artifacts by running `npm run tauri build` in cloak-cluely-ai-assistant.
 
 ---
 
@@ -59,7 +59,7 @@ Whether you use GitHub Releases or Cloudflare R2 (or both), you **always** creat
 
 - Cloudflare account
 - [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/) installed (`npm install -g wrangler` or use `npx wrangler`)
-- Cloak app (invisible-ai-assistant) and tokenoverflow repos on your machine
+- Cloak app (cloak-cluely-ai-assistant) and tokenoverflow repos on your machine
 
 ---
 
@@ -67,7 +67,7 @@ Whether you use GitHub Releases or Cloudflare R2 (or both), you **always** creat
 
 If you haven’t built yet, follow **Step 0** above. Then:
 
-1. Open the **invisible-ai-assistant** project and run `npm run tauri build` (or use the artifacts you already built).
+1. Open the **cloak-cluely-ai-assistant** project and run `npm run tauri build` (or use the artifacts you already built).
 
 2. Find the built artifacts (see paths in Step 0). For current version **0.1.9** the macOS DMGs are:
    - `src-tauri/target/release/bundle/dmg/Cloak_0.1.9_aarch64.dmg`
@@ -161,7 +161,7 @@ The Cloak page reads **build-time** `VITE_*` variables. You must set them where 
    # VITE_CLOAK_LINUX_RPM=...
 
    # Optional: link to install / troubleshooting doc
-   # VITE_CLOAK_MACOS_INSTALL_DOC=https://github.com/yourorg/invisible-ai-assistant/wiki/Install-macOS
+   # VITE_CLOAK_MACOS_INSTALL_DOC=https://github.com/yourorg/cloak-cluely-ai-assistant/wiki/Install-macOS
    ```
 
 2. Replace `pub-xxxx.r2.dev` and `cloak-releases` (and file names) with your actual R2 base URL and object keys.
